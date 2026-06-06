@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KadimaSearch | חיפוש AI במסמכים לעורכי דין, רואי חשבון וקליניקות | קדימה</title>
+  <meta name="description" content="KadimaSearch הופך אלפי PDF, חוזים וחשבוניות לידע שאפשר לשאול בעברית. POC חינם של 14 יום. פרטיות מלאה. לעורכי דין, רואי חשבון, קליניקות בישראל." />
+  <meta name="keywords" content="חיפוש מסמכים AI, ניהול ידע משרד עורכי דין, אוטומציה רואה חשבון, RAG עברית, חיפוש חכם קבצים, ניהול חוזים AI ישראל" />
+  <link rel="canonical" href="https://kadima.co.il/services/document-search" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "KadimaSearch",
+    "applicationCategory": "BusinessApplication",
+    "description": "AI document search and intelligence for Israeli SMBs — lawyers, accountants, clinics",
+    "offers": [
+      { "@type": "Offer", "name": "Starter", "price": "1200", "priceCurrency": "ILS", "billingDuration": "P1M" },
+      { "@type": "Offer", "name": "Professional", "price": "2800", "priceCurrency": "ILS", "billingDuration": "P1M" }
+    ],
+    "inLanguage": "he",
+    "operatingSystem": "Web"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+
+  <style>
+    /* ── KadimaSearch page-specific tokens ── */
+    --ks-blue: #3B82F6;
+    --ks-indigo: #6366f1;
+    --ks-glow: rgba(99,102,241,.28);
+
+    /* ── Floating document icons (CSS only) ── */
+    .doc-float {
+      position: absolute;
+      opacity: .07;
+      font-size: 3.5rem;
+      animation: floatDoc 9s ease-in-out infinite;
+      pointer-events: none;
+      user-select: none;
+    }
+    .doc-float:nth-child(1) { top: 12%; left:  8%; animation-delay: 0s;   animation-duration: 11s; }
+    .doc-float:nth-child(2) { top: 55%; left:  4%; animation-delay: 2s;   animation-duration:  9s; }
+    .doc-float:nth-child(3) { top: 20%; right: 6%; animation-delay: 1s;   animation-duration: 13s; }
+    .doc-float:nth-child(4) { top: 70%; right: 8%; animation-delay: 3.5s; animation-duration: 10s; }
+    .doc-float:nth-child(5) { top: 40%; left: 48%; animation-delay: 1.8s; animation-duration: 12s; }
+    @keyframes floatDoc {
+      0%,100% { transform: translateY(0) rotate(-4deg); }
+      50%      { transform: translateY(-22px) rotate(4deg); }
+    }
+
+    /* ── Hero overrides ── */
+    .ks-hero {
+      padding: 120px 0 80px;
+      background:
+        radial-gradient(circle at 10% 25%, rgba(99,102,241,.2), transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(59,130,246,.15), transparent 45%),
+        var(--navy);
+      background-size: 200% 200%, 200% 200%, auto;
+      animation: meshMove 18s ease-in-out infinite alternate;
+      overflow: hidden;
+      position: relative;
+    }
+    .ks-hero .container { position: relative; z-index: 1; }
+
+    .ks-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(99,102,241,.14);
+      border: 1px solid rgba(99,102,241,.45);
+      color: var(--text-light);
+      font-weight: 700;
+      font-size: .88rem;
+      padding: 9px 18px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .ks-badge .lock { color: #a5b4fc; }
+
+    .ks-hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      color: #fff;
+      margin-bottom: 18px;
+      text-wrap: balance;
+      max-width: 780px;
+    }
+    .ks-hl { color: #818cf8; }
+    .ks-hero .lead { max-width: 640px; }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 22px;
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    .trust-row span { display: inline-flex; align-items: center; gap: 5px; }
+    .trust-row .chk { color: #818cf8; font-weight: 800; }
+
+    /* ── Pain cards ── */
+    .pain-card-ks {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-right: 3px solid #ef4444;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+    .pain-stat { font-size: 2rem; font-weight: 800; color: #f87171; margin-bottom: 6px; }
+    .pain-card-ks h3 { font-size: 1.05rem; color: #fff; margin-bottom: 10px; }
+    .pain-card-ks p { color: var(--muted); font-size: .95rem; line-height: 1.65; }
+
+    /* ── Mock UI ── */
+    .mock-ui {
+      background: #0b1120;
+      border: 1px solid rgba(99,102,241,.5);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 0 40px rgba(99,102,241,.18), 0 20px 50px rgba(0,0,0,.4);
+    }
+    .mock-topbar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .mock-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .mock-dot.r { background: #ef4444; }
+    .mock-dot.y { background: #f59e0b; }
+    .mock-dot.g { background: #22c55e; }
+
+    .mock-search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #131d30;
+      border: 1.5px solid rgba(99,102,241,.4);
+      border-radius: 12px;
+      padding: 11px 16px;
+      margin-bottom: 18px;
+      color: #64748b;
+      font-size: .9rem;
+    }
+    .mock-search .icon { font-size: 1rem; }
+
+    .mock-query {
+      background: rgba(99,102,241,.1);
+      border: 1px solid rgba(99,102,241,.3);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #a5b4fc;
+      font-size: .9rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      direction: rtl;
+    }
+    .mock-result {
+      background: #131d30;
+      border: 1px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 10px;
+    }
+    .mock-result:last-child { margin-bottom: 0; }
+    .mock-doc-name {
+      font-size: .8rem;
+      color: #818cf8;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mock-excerpt {
+      font-size: .83rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      direction: rtl;
+    }
+    .mock-excerpt mark {
+      background: rgba(99,102,241,.35);
+      color: #c7d2fe;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    .mock-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .mock-badge {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .mock-badge.src { background: rgba(59,130,246,.15); color: #93c5fd; border: 1px solid rgba(59,130,246,.3); }
+    .mock-badge.conf { background: rgba(34,197,94,.12); color: #86efac; border: 1px solid rgba(34,197,94,.25); }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 52px;
+      align-items: center;
+    }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+    .feature-list li { display: flex; align-items: flex-start; gap: 12px; }
+    .feature-list .fi { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .feature-list h4 { font-size: 1rem; color: #fff; margin-bottom: 4px; }
+    .feature-list p { color: var(--muted); font-size: .92rem; line-height: 1.55; }
+
+    /* ── Tabs ── */
+    .tabs-wrap { }
+    .tab-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border-dark);
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: .9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .tab-btn:hover { border-color: #818cf8; color: #fff; }
+    .tab-btn.active {
+      background: rgba(99,102,241,.15);
+      border-color: #6366f1;
+      color: #a5b4fc;
+    }
+    .tab-panel { display: none; animation: fadeUp .35s ease; }
+    .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .tab-pain {
+      background: rgba(239,68,68,.07);
+      border: 1px solid rgba(239,68,68,.2);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      margin-bottom: 20px;
+    }
+    .tab-pain h4 { color: #fca5a5; margin-bottom: 8px; font-size: .95rem; }
+    .tab-pain p { color: var(--muted); font-size: .9rem; }
+    .tab-examples { display: flex; flex-direction: column; gap: 10px; }
+    .tab-query {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: .88rem;
+      color: var(--text-light);
+      direction: rtl;
+      font-family: inherit;
+    }
+    .tab-query::before { content: '🔍 '; }
+    .tab-roi {
+      background: rgba(99,102,241,.1);
+      border: 1px solid rgba(99,102,241,.3);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-top: 20px;
+    }
+    .tab-roi p { color: #a5b4fc; font-size: .9rem; font-weight: 600; }
+
+    /* ── ROI Calculator ── */
+    .roi-calc {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-radius: 22px;
+      padding: 40px 36px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .roi-row { margin-bottom: 28px; }
+    .roi-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .roi-label span { font-weight: 700; color: var(--text-light); }
+    .roi-label strong { color: #818cf8; font-size: 1.1rem; }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #6366f1;
+      height: 6px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .roi-results {
+      background: var(--navy);
+      border: 1px solid rgba(99,102,241,.3);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .roi-item { }
+    .roi-item label { font-size: .8rem; color: var(--muted); font-weight: 600; display: block; margin-bottom: 4px; }
+    .roi-item .val { font-size: 1.4rem; font-weight: 800; color: #fff; }
+    .roi-item.highlight .val { color: #4ade80; font-size: 1.7rem; }
+    .roi-item.highlight label { color: #86efac; }
+    .roi-note { text-align: center; color: var(--muted); font-size: .88rem; margin-top: 16px; }
+
+    /* ── Pricing ── */
+    .ks-pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .ks-pricing-card {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      padding: 32px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+    .ks-pricing-card:hover { transform: translateY(-4px); border-color: #6366f1; }
+    .ks-pricing-card.rec { border-color: #6366f1; box-shadow: 0 0 0 1px #6366f1, 0 12px 36px rgba(99,102,241,.25); }
+    .ks-plan-label { font-size: .75rem; font-weight: 700; color: #818cf8; text-transform: uppercase; letter-spacing: 1px; }
+    .ks-plan-label.rec { color: var(--gold); }
+    .ks-pricing-card h3 { font-size: 1.25rem; color: #fff; }
+    .ks-price { font-size: 2rem; font-weight: 800; color: #818cf8; }
+    .ks-price span { font-size: .95rem; color: var(--muted); font-weight: 600; }
+    .ks-setup { font-size: .82rem; color: var(--muted); margin-bottom: 4px; }
+    .ks-divider { border: none; border-top: 1px solid var(--border-dark); margin: 6px 0; }
+    .ks-pricing-card ul { color: var(--text-light); font-size: .9rem; display: flex; flex-direction: column; gap: 7px; flex-grow: 1; }
+    .ks-pricing-card ul li::before { content: "✓ "; color: #818cf8; font-weight: 800; }
+    .ks-pricing-card .btn { align-self: stretch; margin-top: 8px; }
+    .guarantee { text-align: center; color: var(--muted); font-size: .9rem; margin-top: 24px; }
+    .guarantee strong { color: var(--text-light); }
+
+    /* ── Trust blocks ── */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .trust-block {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+    .trust-block .ti { font-size: 2rem; margin-bottom: 12px; }
+    .trust-block h3 { font-size: 1.05rem; color: #fff; margin-bottom: 8px; }
+    .trust-block p { color: var(--muted); font-size: .93rem; line-height: 1.6; }
+
+    /* ── Onboarding Timeline ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      right: 10%;
+      left: 10%;
+      height: 2px;
+      background: linear-gradient(to left, rgba(99,102,241,.15), rgba(99,102,241,.6), rgba(99,102,241,.15));
+    }
+    .tl-step { text-align: center; padding: 0 8px; position: relative; }
+    .tl-icon {
+      width: 72px; height: 72px;
+      background: rgba(99,102,241,.12);
+      border: 2px solid #6366f1;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 14px;
+      position: relative;
+      z-index: 1;
+      background: var(--navy);
+    }
+    .tl-when { font-size: .72rem; color: #818cf8; font-weight: 700; margin-bottom: 6px; }
+    .tl-step h3 { font-size: .92rem; color: #fff; margin-bottom: 6px; }
+    .tl-step p { color: var(--muted); font-size: .8rem; line-height: 1.5; }
+
+    /* ── FAQ Accordion ── */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .2s ease;
+    }
+    .faq-item.open { border-color: rgba(99,102,241,.4); }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      user-select: none;
+      gap: 16px;
+    }
+    .faq-q .arr {
+      font-size: .75rem;
+      color: var(--muted);
+      transition: transform .25s ease;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-q .arr { transform: rotate(180deg); color: #818cf8; }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+    .faq-a-inner { padding: 0 22px 18px; color: var(--muted); line-height: 1.65; font-size: .95rem; }
+
+    /* ── Lead Form extra fields ── */
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .cb-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--navy);
+      border: 1.5px solid var(--border-dark);
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--text-light);
+      transition: border-color .2s ease;
+    }
+    .cb-item:hover { border-color: #6366f1; }
+    .cb-item input { accent-color: #6366f1; width: 16px; height: 16px; cursor: pointer; }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .tab-panel.active { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: 1fr; }
+      .timeline::before { display: none; }
+      .tl-step { display: flex; gap: 16px; text-align: right; padding: 12px 0; align-items: flex-start; }
+      .tl-icon { flex-shrink: 0; width: 52px; height: 52px; font-size: 1.3rem; margin: 0; }
+      .ks-pricing-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .roi-results { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .tab-buttons { gap: 6px; }
+      .tab-btn { padding: 8px 14px; font-size: .82rem; }
+      .roi-calc { padding: 26px 18px; }
+      .check-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <div class="logo-wrap">
+      <a href="/" class="logo">קדימ<span>ה</span></a>
+      <span class="logo-tag">הדיגיטל שעובד בשבילך — לא נגדך</span>
+    </div>
+    <nav class="nav-links">
+      <a href="/services/landing-website.html">אתר תדמית</a>
+      <a href="/services/ecommerce-website.html">חנות אונליין</a>
+      <a href="/services/whatsapp-bot.html">נועה AI</a>
+      <a href="/services/ai-receptionist.html">דנה AI</a>
+      <a href="/services/social-media-ai.html">שירי AI</a>
+      <a href="/services/document-search.html" class="active">KadimaSearch</a>
+    </nav>
+    <a href="#contact" class="btn btn-primary nav-cta">דבר איתנו עכשיו 📲</a>
+  </div>
+</header>
+
+
+<!-- ═══ SECTION 1 — HERO ═══ -->
+<section class="ks-hero">
+  <!-- floating doc icons -->
+  <span class="doc-float">📄</span>
+  <span class="doc-float">📑</span>
+  <span class="doc-float">🗂️</span>
+  <span class="doc-float">📋</span>
+  <span class="doc-float">📂</span>
+
+  <div class="container">
+    <a href="/" class="breadcrumb">← חזרה לעמוד הבית</a>
+
+    <div class="ks-badge"><span class="lock">🔒</span> הנתונים שלך לא יוצאים מהחברה — אי פעם</div>
+
+    <h1>מצא כל מסמך בתוך <span class="ks-hl">3 שניות</span>. שאל שאלה — קבל תשובה עם ציטוט.</h1>
+    <p class="lead">KadimaSearch הופך את כל הניירת של העסק שלך — PDF, חוזים, חשבוניות, סריקות ישנות — למאגר ידע חכם שאפשר לשאול בעברית.</p>
+
+    <div class="hero-cta-row" style="margin-top:28px">
+      <a href="#contact" class="btn btn-primary btn-lg">קבל דמו חינם 15 דקות →</a>
+      <a href="#how-it-works" class="btn btn-ghost btn-lg">איך זה עובד?</a>
+    </div>
+
+    <div class="trust-row reveal">
+      <span><span class="chk">✓</span> עובד עם עברית מלאה</span>
+      <span><span class="chk">✓</span> OCR לסריקות ישנות</span>
+      <span><span class="chk">✓</span> ללא IT</span>
+      <span><span class="chk">✓</span> פרטיות מלאה</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 2 — PAIN ═══ -->
+<section class="svc-section alt">
+  <div class="container">
+    <h2 class="section-title reveal">כמה זמן אתה מבזבז על חיפוש מסמכים?</h2>
+    <div class="feature-grid" style="grid-template-columns:repeat(3,1fr)">
+
+      <div class="pain-card-ks reveal">
+        <div class="pain-stat">⏱️ 47 דקות</div>
+        <h3>ביום — מחיפוש קבצים</h3>
+        <p>ממוצע הזמן שאיש מקצוע מבזבז על חיפוש קבצים, גרסאות ישנות ומסמכים שנשלחו "איפשהו במייל". זה 4 שעות בשבוע — <strong>200 שעות בשנה.</strong></p>
+      </div>
+
+      <div class="pain-card-ks reveal">
+        <div class="pain-stat">😬 58%</div>
+        <h3>שלחו קובץ שגוי ללקוח</h3>
+        <p>מהרואי חשבון שלחו בטעות קובץ לא נכון ללקוח. כשיש 8 שנות תיקייה ולא ניתן לחפש — זה רק עניין של זמן.</p>
+      </div>
+
+      <div class="pain-card-ks reveal">
+        <div class="pain-stat">📦 10+ שנים</div>
+        <h3>ידע תקוע בארגזים</h3>
+        <p>אלפי סריקות, חוזים, הסכמים. אין דרך לשאול "אילו חוזים פגים ב-2025?" — חוץ מלפתוח כל קובץ ידנית.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 3 — PRODUCT ═══ -->
+<section class="svc-section" id="how-it-works">
+  <div class="container">
+    <h2 class="section-title reveal">KadimaSearch — מה בדיוק מקבלים</h2>
+
+    <div class="product-grid">
+
+      <!-- Feature list -->
+      <ul class="feature-list reveal">
+        <li>
+          <span class="fi">🔍</span>
+          <div>
+            <h4>חיפוש סמנטי בעברית</h4>
+            <p>לא חיפוש מילות מפתח. שאל "כמה אני חייב לספק X?" והמערכת מוצאת את התשובה גם אם המסמך כתוב אחרת.</p>
+          </div>
+        </li>
+        <li>
+          <span class="fi">📄</span>
+          <div>
+            <h4>תמיכה בכל סוג קובץ</h4>
+            <p>PDF, Word, Excel, מיילים, WhatsApp exports, סריקות ישנות — OCR אוטומטי כולל כתב יד מודפס.</p>
+          </div>
+        </li>
+        <li>
+          <span class="fi">🔒</span>
+          <div>
+            <h4>פרטיות מלאה</h4>
+            <p>המסמכים שלך לא עוברים לשום ענן חיצוני. רץ בסביבה שלך (on-premise) או VPC פרטי.</p>
+          </div>
+        </li>
+        <li>
+          <span class="fi">📊</span>
+          <div>
+            <h4>דשבורד ניהולי</h4>
+            <p>כמה מסמכים יש, לפי קטגוריות, התראות על חוזים שפגים, חידושי רישיון — הכל במקום אחד.</p>
+          </div>
+        </li>
+        <li>
+          <span class="fi">⚡</span>
+          <div>
+            <h4>אינדוקס שוטף אוטומטי</h4>
+            <p>מסמך חדש נכנס? הוא מאונדקס תוך דקות. אין תחזוקה ידנית.</p>
+          </div>
+        </li>
+        <li>
+          <span class="fi">🧩</span>
+          <div>
+            <h4>ממשק עברי מלא</h4>
+            <p>ה-UI כולו בעברית. אין צורך באנגלית. גם העובד הכי פחות טכנולוגי יוכל להשתמש.</p>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Mock UI -->
+      <div class="mock-ui reveal">
+        <div class="mock-topbar">
+          <div class="mock-dot r"></div>
+          <div class="mock-dot y"></div>
+          <div class="mock-dot g"></div>
+          <span style="font-size:.75rem;color:#64748b;margin-right:auto">KadimaSearch</span>
+        </div>
+
+        <div class="mock-search">
+          <span class="icon">🔍</span>
+          <span>שאל שאלה על המסמכים שלך...</span>
+        </div>
+
+        <div class="mock-query">?אילו חוזי שכירות מסתיימים ב-2025</div>
+
+        <div class="mock-result">
+          <div class="mock-doc-name">📄 חוזה שכירות — רחוב הרצל 12, ינואר 2023.pdf</div>
+          <div class="mock-excerpt">...תקופת השכירות תסתיים ביום <mark>31 במרץ 2025</mark>. הצדדים מסכימים כי בתום התקופה, השוכר יפנה את הנכס תוך 14 יום...</div>
+          <div class="mock-meta">
+            <span class="mock-badge src">📍 עמוד 3, סעיף 4.2</span>
+            <span class="mock-badge conf">✓ התאמה גבוהה</span>
+          </div>
+        </div>
+
+        <div class="mock-result">
+          <div class="mock-doc-name">📄 חוזה שכירות — דיזנגוף 88, מרץ 2022.pdf</div>
+          <div class="mock-excerpt">...השכירות מסתיימת ב<mark>30 ביוני 2025</mark>. אופציה להארכה בהודעה של 60 יום מראש...</div>
+          <div class="mock-meta">
+            <span class="mock-badge src">📍 עמוד 2, סעיף 3.1</span>
+            <span class="mock-badge conf">✓ התאמה גבוהה</span>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:14px;font-size:.78rem;color:#64748b">נמצאו 4 חוזים נוספים — לחץ להצגה</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 4 — VERTICAL TABS ═══ -->
+<section class="svc-section alt">
+  <div class="container">
+    <h2 class="section-title reveal">מה זה עושה לכל ענף</h2>
+    <div class="tabs-wrap reveal">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="lawyers">⚖️ עורכי דין</button>
+        <button class="tab-btn" data-tab="accountants">📊 רואי חשבון</button>
+        <button class="tab-btn" data-tab="clinics">🏥 קליניקות ובריאות</button>
+        <button class="tab-btn" data-tab="realestate">🏢 נדל"ן וניהול נכסים</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-lawyers">
+        <div>
+          <div class="tab-pain">
+            <h4>הבעיה</h4>
+            <p>10,000 תיקים. כשצריך לאתר פרשנות בחוזה מ-2018 — מחפשים ידנית. עובד שעות על גרסה ישנה של טיוטה.</p>
+          </div>
+          <div class="tab-roi">
+            <p>💰 ROI: חוסך 2–4 שעות בכל תיק. 20 תיקים בחודש = עד 80 שעות עבודה בחיסכון.</p>
+          </div>
+        </div>
+        <div>
+          <p style="color:var(--muted);font-size:.88rem;margin-bottom:12px;font-weight:700">דוגמאות לשאלות שהמשרד שלך ישאל:</p>
+          <div class="tab-examples">
+            <div class="tab-query">"הצג לי את כל התיקים בנושא פיטורים שלא כדין מ-2020 ואילך"</div>
+            <div class="tab-query">"מה כתוב בסעיף הסודיות בחוזה מרץ 2022 עם לקוח X?"</div>
+            <div class="tab-query">"אילו כתבי תביעה מציינים נזק מעל ₪500,000?"</div>
+            <div class="tab-query">"מה הגרסה האחרונה של חוזה השכירות עם Y?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-accountants">
+        <div>
+          <div class="tab-pain">
+            <h4>הבעיה</h4>
+            <p>200 לקוחות, כל אחד עם תיקייה. כשהרשות שואלת — צריך לחפש ידנית בין 8 שנות קבצים.</p>
+          </div>
+          <div class="tab-roi">
+            <p>💰 ROI: חוסך ½ יום עבודה לכל ביקורת. 10 ביקורות בשנה = 5 ימי עבודה מוחזרים.</p>
+          </div>
+        </div>
+        <div>
+          <p style="color:var(--muted);font-size:.88rem;margin-bottom:12px;font-weight:700">דוגמאות לשאלות:</p>
+          <div class="tab-examples">
+            <div class="tab-query">"הצג את כל הדוחות של לקוח X מ-2020 עד היום"</div>
+            <div class="tab-query">"אילו לקוחות לא הגישו דוח שנתי לשנת 2024?"</div>
+            <div class="tab-query">"מה היה מחזור לקוח Y ברבעון 3?"</div>
+            <div class="tab-query">"מי לא שלח אישור ניכוי מס לשנת 2023?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-clinics">
+        <div>
+          <div class="tab-pain">
+            <h4>הבעיה</h4>
+            <p>תיקי מטופלים, טפסי ביטוח, הסכמי ספקים — פרוסים בכל מקום. כל מסמך שגוי = סיכון.</p>
+          </div>
+          <div class="tab-roi">
+            <p>💰 ROI: הפחתת טעויות ניהוליות. מניעת פספוס חידוש רישיון = עשרות אלפים בקנסות.</p>
+          </div>
+        </div>
+        <div>
+          <p style="color:var(--muted);font-size:.88rem;margin-bottom:12px;font-weight:700">דוגמאות לשאלות:</p>
+          <div class="tab-examples">
+            <div class="tab-query">"מתי מסתיים חוזה הספק של ציוד X?"</div>
+            <div class="tab-query">"הצג טפסי ביטוח של מטופלים שלא חידשו תוקף"</div>
+            <div class="tab-query">"מה הפרוטוקול לטיפול ב-X לפי מסמכי הקליניקה?"</div>
+            <div class="tab-query">"מי מהרופאים לא חידש רישיון מקצועי השנה?"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-realestate">
+        <div>
+          <div class="tab-pain">
+            <h4>הבעיה</h4>
+            <p>300 חוזי שכירות. מי מסתיים מתי? מי חייב עדיין? אין מערכת. כל חידוש שנפספס = הפסד.</p>
+          </div>
+          <div class="tab-roi">
+            <p>💰 ROI: מניעת פספוס חידוש חוזה אחד = עשרות אלפי שקלים. לכמה נכסים יש לך?</p>
+          </div>
+        </div>
+        <div>
+          <p style="color:var(--muted);font-size:.88rem;margin-bottom:12px;font-weight:700">דוגמאות לשאלות:</p>
+          <div class="tab-examples">
+            <div class="tab-query">"אילו חוזים מסתיימים ב-3 החודשים הקרובים?"</div>
+            <div class="tab-query">"מי לא שילם שכירות יולי?"</div>
+            <div class="tab-query">"מה תנאי הפינוי בנכס ברחוב X?"</div>
+            <div class="tab-query">"אילו נכסים יש להם אישורי בנייה שפגים ב-2025?"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 5 — ROI CALCULATOR ═══ -->
+<section class="svc-section">
+  <div class="container">
+    <h2 class="section-title reveal" style="text-align:center">כמה שעות וכסף תחסוך בשנה?</h2>
+    <p class="section-sub reveal" style="text-align:center;margin:0 auto 36px">הזז את הסליידרים — ראה את החישוב מיד</p>
+
+    <div class="roi-calc reveal">
+      <div class="roi-row">
+        <div class="roi-label">
+          <span>כמה עובדים מחפשים מסמכים?</span>
+          <strong id="empVal">5 עובדים</strong>
+        </div>
+        <input type="range" id="empSlider" min="1" max="50" value="5" />
+      </div>
+      <div class="roi-row">
+        <div class="roi-label">
+          <span>כמה דקות ביום לעובד?</span>
+          <strong id="minVal">45 דקות</strong>
+        </div>
+        <input type="range" id="minSlider" min="15" max="120" value="45" />
+      </div>
+
+      <div class="roi-results">
+        <div class="roi-item">
+          <label>שעות שמתבזבזות בשנה</label>
+          <div class="val" id="hoursYear">—</div>
+        </div>
+        <div class="roi-item">
+          <label>עלות לפי שכר ממוצע (₪50/שעה)</label>
+          <div class="val" id="costYear">—</div>
+        </div>
+        <div class="roi-item">
+          <label>KadimaSearch עולה</label>
+          <div class="val" id="ksCost">—</div>
+        </div>
+        <div class="roi-item highlight">
+          <label>חיסכון שנתי מוערך</label>
+          <div class="val" id="saving">—</div>
+        </div>
+        <div class="roi-item" style="grid-column:1/-1">
+          <label>החזר השקעה תוך</label>
+          <div class="val" id="roi">—</div>
+        </div>
+      </div>
+      <p class="roi-note">* רוב הלקוחות רואים ROI תוך <strong>6–8 שבועות</strong></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 6 — PRICING ═══ -->
+<section class="svc-section alt">
+  <div class="container">
+    <h2 class="section-title reveal">מחירים שקופים — ללא הפתעות</h2>
+
+    <div class="ks-pricing-grid">
+
+      <div class="ks-pricing-card reveal">
+        <div class="ks-plan-label">🌱 Starter</div>
+        <h3>לעסק שמתחיל לסדר את הניירת</h3>
+        <div class="ks-price">₪1,200 <span>/ חודש</span></div>
+        <div class="ks-setup">+ הקמה: ₪3,500 חד פעמי</div>
+        <hr class="ks-divider" />
+        <ul>
+          <li>עד 5,000 מסמכים</li>
+          <li>3 משתמשים</li>
+          <li>PDF + Word + Excel</li>
+          <li>ממשק חיפוש עברי מלא</li>
+          <li>תמיכה בוואטסאפ</li>
+          <li>דשבורד בסיסי</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">התחל עם Starter</a>
+      </div>
+
+      <div class="ks-pricing-card rec reveal">
+        <div class="ks-plan-label rec">🚀 Professional — מומלץ ⭐</div>
+        <h3>למשרד עם ניירת רצינית</h3>
+        <div class="ks-price">₪2,800 <span>/ חודש</span></div>
+        <div class="ks-setup">+ הקמה: ₪6,500 חד פעמי</div>
+        <hr class="ks-divider" />
+        <ul>
+          <li>עד 50,000 מסמכים</li>
+          <li>15 משתמשים</li>
+          <li>כל סוגי הקבצים + OCR לסריקות</li>
+          <li>חיפוש סמנטי מלא</li>
+          <li>התראות על תפוגת מסמכים</li>
+          <li>אינטגרציה עם Google Drive / Dropbox</li>
+          <li>עדיפות תמיכה</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">התחל עם Professional</a>
+      </div>
+
+      <div class="ks-pricing-card reveal">
+        <div class="ks-plan-label">🏢 Enterprise</div>
+        <h3>לארגון עם דרישות מיוחדות</h3>
+        <div class="ks-price" style="font-size:1.5rem">מחיר מותאם</div>
+        <div class="ks-setup">הקמה לפי היקף</div>
+        <hr class="ks-divider" />
+        <ul>
+          <li>מסמכים ללא הגבלה</li>
+          <li>משתמשים ללא הגבלה</li>
+          <li>On-premise / VPC פרטי</li>
+          <li>אינטגרציה ל-ERP / CRM קיים</li>
+          <li>SLA מוגדר</li>
+          <li>הדרכת צוות</li>
+          <li>מנהל לקוח ייעודי</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">דבר איתנו על Enterprise</a>
+      </div>
+
+    </div>
+    <p class="guarantee reveal">כל התוכניות כוללות: <strong>30 יום ניסיון עם החזר כסף מלא</strong> אם לא מרוצה. ללא קנסות ביטול.</p>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 7 — TRUST & PRIVACY ═══ -->
+<section class="svc-section">
+  <div class="container">
+    <h2 class="section-title reveal">הנתונים שלך — שלך בלבד</h2>
+    <p class="section-sub reveal">אנחנו יודעים שאתה עורך דין / רואה חשבון / מנהל קליניקה. הפרטיות אצלך היא לא עדיפות — היא חובה מקצועית.</p>
+
+    <div class="trust-grid">
+      <div class="trust-block reveal">
+        <div class="ti">🔒</div>
+        <h3>לא ענן חיצוני</h3>
+        <p>המסמכים שלך לא עוברים ל-OpenAI, לא ל-Google, לא לאף שרת חיצוני. הכל מעובד בסביבה שלך בלבד.</p>
+      </div>
+      <div class="trust-block reveal">
+        <div class="ti">🛡️</div>
+        <h3>הצפנה מלאה AES-256</h3>
+        <p>כל מסמך מוצפן בזמן אחסון ובזמן העברה. גם אנחנו לא יכולים לראות את תוכן המסמכים שלך.</p>
+      </div>
+      <div class="trust-block reveal">
+        <div class="ti">⚖️</div>
+        <h3>תואם דרישות לשכת עורכי הדין ורואי החשבון</h3>
+        <p>הפתרון תוכנן מראש לעמוד בדרישות סודיות מקצועית. אפשר להציג ללשכה ולביקורת.</p>
+      </div>
+      <div class="trust-block reveal">
+        <div class="ti">📝</div>
+        <h3>הסכם עיבוד נתונים (DPA) חתום</h3>
+        <p>כל לקוח מקבל הסכם DPA חתום. אנחנו מתחייבים בכתב על סודיות ואי-שימוש בנתוניך.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 8 — ONBOARDING ═══ -->
+<section class="svc-section alt">
+  <div class="container">
+    <h2 class="section-title reveal">מההתחלה ועד שאתה חפשת — תוך 2 שבועות</h2>
+
+    <div class="timeline reveal">
+      <div class="tl-step">
+        <div class="tl-icon">📞</div>
+        <div>
+          <div class="tl-when">שבוע 1, ימים 1–2</div>
+          <h3>שיחת מיפוי</h3>
+          <p>מבינים כמה מסמכים יש, אילו סוגים, מה הכי כואב. מגדירים מטרות.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-icon">⚙️</div>
+        <div>
+          <div class="tl-when">שבוע 1, ימים 3–5</div>
+          <h3>הקמת סביבה</h3>
+          <p>מתקינים את המערכת בסביבה שלך. אתה לא נוגע בזה.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-icon">📄</div>
+        <div>
+          <div class="tl-when">שבוע 2, ימים 1–3</div>
+          <h3>אינדוקס המסמכים</h3>
+          <p>מעלים את כל הניירת הקיימת. OCR לסריקות ישנות. גם ארגזים פיזיים.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-icon">🎓</div>
+        <div>
+          <div class="tl-when">שבוע 2, ימים 4–5</div>
+          <h3>הדרכה + Go Live</h3>
+          <p>הדרכת 2 שעות לצוות. מישהו מקדימה זמין בוואטסאפ ביום הראשון.</p>
+        </div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-icon">♻️</div>
+        <div>
+          <div class="tl-when">מכאן ואילך</div>
+          <h3>אינדוקס שוטף</h3>
+          <p>מסמך חדש נכנס? הוא נוסף אוטומטית. אין תחזוקה ידנית.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 9 — FAQ ═══ -->
+<section class="svc-section">
+  <div class="container">
+    <h2 class="section-title reveal" style="text-align:center">שאלות שאנחנו שומעים הרבה</h2>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">האם המסמכים שלי עוברים לחו"ל? <span class="arr">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">לא. המערכת רצה על שרת שנמצא בישראל (או אצלך), ולא שולחת תוכן לשירותי ענן חיצוניים כמו OpenAI, Google או AWS אמריקאי.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">כמה מסמכים אפשר להכניס? <span class="arr">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Starter תומך ב-5,000 מסמכים. Professional — 50,000. Enterprise — ללא הגבלה. אם אתה בין תוכניות — נדבר ונמצא פתרון.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">האם זה עובד על סריקות ישנות ומטושטשות? <span class="arr">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">ברוב המקרים כן. יש לנו OCR מותאם לעברית שמטפל גם בסריקות באיכות בינונית. נבדוק את הקבצים שלך בחינם לפני שמתחילים.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">כמה זמן לוקח האינדוקס הראשוני? <span class="arr">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">5,000 מסמכים — בין 2–6 שעות. 50,000 מסמכים — יום עד יומיים. תלוי בגודל ואיכות הקבצים.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">מה אם אני מוסיף מסמכים כל הזמן? <span class="arr">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">יש אינדוקס אוטומטי שוטף. קובץ חדש שנוסף לתיקייה המוגדרת — נכנס למערכת תוך דקות. אין תחזוקה ידנית.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">אפשר לנסות לפני שמשלמים? <span class="arr">▼</span></div>
+        <div class="faq-a"><div class="faq-a-inner">כן. אנחנו מציעים Proof of Concept של 14 יום — אנחנו מאנדקסים 500 מסמכים שלך, אתה בודק את המערכת על ניירת אמיתית, ואחר כך מחליט.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ SECTION 10 — LEAD FORM ═══ -->
+<section class="svc-section alt" id="contact">
+  <div class="container">
+    <h2 class="section-title reveal">רוצה לראות את זה על המסמכים שלך?</h2>
+    <p class="section-sub reveal">POC של 14 יום — אנחנו מאנדקסים 500 מסמכים בחינם. אתה רואה את המערכת עובדת על ניירת שלך, ואחר כך מחליט.</p>
+
+    <div class="form-wrap reveal">
+      <form id="leadForm" novalidate>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label for="fullName">שם מלא <span class="req">*</span></label>
+            <input type="text" id="fullName" name="fullName" class="form-control" required />
+            <div class="field-error">נא למלא שם מלא</div>
+          </div>
+          <div class="form-group">
+            <label for="role">תפקיד בעסק <span class="req">*</span></label>
+            <input type="text" id="role" name="role" class="form-control" placeholder='עו"ד / שותף / מנהל משרד' required />
+            <div class="field-error">נא למלא תפקיד</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label for="bizName">שם המשרד / עסק <span class="req">*</span></label>
+            <input type="text" id="bizName" name="bizName" class="form-control" required />
+            <div class="field-error">נא למלא שם עסק</div>
+          </div>
+          <div class="form-group">
+            <label for="phone">מספר טלפון <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="050-000-0000" required />
+            <div class="field-error">נא למלא מספר טלפון תקין</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="docCount">כמה מסמכים בערך יש לכם?</label>
+          <select id="docCount" name="docCount" class="form-control">
+            <option value="">בחר טווח...</option>
+            <option>פחות מ-1,000</option>
+            <option>1,000–10,000</option>
+            <option>10,000–50,000</option>
+            <option>מעל 50,000</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>מה סוג המסמכים העיקרי?</label>
+          <div class="check-grid">
+            <label class="cb-item"><input type="checkbox" name="docType" value="חוזים" /> חוזים</label>
+            <label class="cb-item"><input type="checkbox" name="docType" value="חשבוניות" /> חשבוניות</label>
+            <label class="cb-item"><input type="checkbox" name="docType" value="תיקי לקוחות" /> תיקי לקוחות</label>
+            <label class="cb-item"><input type="checkbox" name="docType" value="כתבי טענות משפטיים" /> כתבי טענות משפטיים</label>
+            <label class="cb-item"><input type="checkbox" name="docType" value="רישיונות ואישורים" /> רישיונות ואישורים</label>
+            <label class="cb-item"><input type="checkbox" name="docType" value="אחר" /> אחר</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
+          <span class="spinner" id="spinner"></span>
+          <span id="btnLabel">שלח — נחזור תוך שעה לתיאום דמו ✅</span>
+        </button>
+      </form>
+
+      <div class="thank-you" id="thankYou">
+        <h3>קיבלנו! 🎉</h3>
+        <p>ניצור איתך קשר תוך שעה לתיאום 15 דקות דמו על המסמכים שלך. רוצה לדבר עכשיו?</p>
+        <a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="btn btn-wa">פתח שיחה עכשיו →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="/" class="footer-logo">קדימ<span>ה</span></a>
+      <p class="footer-about">הופכים עסקים קטנים ובינוניים לדיגיטליים — אתרים, חנויות, בוטים ואוטומציות שעובדים בשבילך.</p>
+    </div>
+    <div>
+      <h4>העובדות שלנו</h4>
+      <ul>
+        <li><a href="/services/social-media-ai.html">שירי — סושיאל מדיה AI</a></li>
+        <li><a href="/services/ai-receptionist.html">דנה — מזכירה AI</a></li>
+        <li><a href="/services/whatsapp-bot.html">נועה — בוט וואטסאפ AI</a></li>
+      </ul>
+      <h4 style="margin-top:16px">שירותים נוספים</h4>
+      <ul>
+        <li><a href="/services/landing-website.html">אתר תדמית</a></li>
+        <li><a href="/services/ecommerce-website.html">חנות אונליין</a></li>
+        <li><a href="/services/google-reviews-bot.html">בוט ביקורות גוגל</a></li>
+        <li><a href="/services/appointments-clinics.html">מערכת תורים</a></li>
+        <li><a href="/services/document-search.html">KadimaSearch</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>דברו איתנו</h4>
+      <ul>
+        <li><a href="tel:+972504593267">050-459-3267</a></li>
+        <li><a href="https://wa.me/972504593267" target="_blank" rel="noopener">כתוב לנו בוואטסאפ 💬</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 קדימה. כל הזכויות שמורות.</p></div></div>
+</footer>
+
+<a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="whatsapp-float pulse" aria-label="דבר איתנו בוואטסאפ">
+  <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.04c-.24.68-1.4 1.3-1.94 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-2.99 0-1.42.75-2.12 1.01-2.41.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.65.49.24.57.81 1.97.88 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.69-.81.87-1.09.18-.28.36-.23.61-.14.25.09 1.6.76 1.88.9.28.14.46.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+
+<script src="/app.js"></script>
+<script>
+  /* ── Tabs ── */
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+    });
+  });
+
+  /* ── FAQ Accordion ── */
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = q.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        var a = item.querySelector('.faq-a');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ── ROI Calculator ── */
+  var empSlider = document.getElementById('empSlider');
+  var minSlider = document.getElementById('minSlider');
+  var empVal    = document.getElementById('empVal');
+  var minVal    = document.getElementById('minVal');
+  var hoursYear = document.getElementById('hoursYear');
+  var costYear  = document.getElementById('costYear');
+  var ksCost    = document.getElementById('ksCost');
+  var saving    = document.getElementById('saving');
+  var roi       = document.getElementById('roi');
+
+  function calcROI() {
+    var emp = parseInt(empSlider.value);
+    var min = parseInt(minSlider.value);
+    empVal.textContent = emp + ' עובדים';
+    minVal.textContent = min + ' דקות';
+
+    var hrs = Math.round(emp * min / 60 * 250); // 250 work days
+    var cost = hrs * 50;
+
+    // pricing tier based on employees
+    var monthly = emp <= 3 ? 1200 : emp <= 15 ? 2800 : 4500;
+    var annual = monthly * 12;
+    var save = Math.max(0, cost - annual);
+    var roiMonths = save > 0 ? (annual / (cost / 12)).toFixed(1) : '—';
+
+    hoursYear.textContent = hrs.toLocaleString('he-IL') + ' שעות';
+    costYear.textContent  = '₪' + cost.toLocaleString('he-IL');
+    ksCost.textContent    = '₪' + monthly.toLocaleString('he-IL') + '/חודש';
+    saving.textContent    = save > 0 ? '₪' + save.toLocaleString('he-IL') : 'תלוי בתוכנית';
+    roi.textContent       = save > 0 ? roiMonths + ' חודשים' : 'צור קשר לחישוב';
+  }
+
+  empSlider.addEventListener('input', calcROI);
+  minSlider.addEventListener('input', calcROI);
+  calcROI();
+
+  /* ── Mobile form grid fix ── */
+  (function() {
+    var grids = document.querySelectorAll('.form-wrap [style*="grid-template-columns:1fr 1fr"]');
+    function fix() {
+      grids.forEach(function(g) {
+        g.style.gridTemplateColumns = window.innerWidth < 600 ? '1fr' : '1fr 1fr';
+      });
+    }
+    window.addEventListener('resize', fix, { passive: true });
+    fix();
+  })();
+</script>
+</body>
+</html>
