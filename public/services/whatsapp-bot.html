@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>בוט וואטסאפ אוטומטי + מעקב לקוחות | קדימה</title>
+  <meta name="description" content="בוט וואטסאפ חכם לעסקים — עונה ללידים אוטומטית, שולח פולואפ ללקוחות שלא סגרו, מקבל הזמנות ושולח תזכורות. מ-1,200₪ הגדרה." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .wa-green { color: #25D366; }
+    .chat-bubble-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #0a1628;
+      border: 1px solid var(--border-dark);
+      border-radius: 20px;
+      padding: 24px 20px;
+      min-width: 220px;
+      max-width: 280px;
+    }
+    .chat-bubble {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: .88rem;
+      line-height: 1.5;
+      position: relative;
+    }
+    .bubble-in {
+      background: #1e293b;
+      border: 1px solid var(--border-dark);
+      color: var(--text-light);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .bubble-out {
+      background: #054e3f;
+      color: #d1fae5;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .bubble-time { font-size: .72rem; color: var(--muted); margin-top: 4px; text-align: left; }
+    .chat-label { font-size: .75rem; color: var(--muted); text-align: center; margin: 4px 0; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <div class="logo-wrap">
+        <a href="/" class="logo">קדימ<span>ה</span></a>
+        <span class="logo-tag">הדיגיטל שעובד בשבילך — לא נגדך</span>
+      </div>
+      <nav class="nav-links">
+        <a href="/services/landing-website.html">אתר תדמית</a>
+        <a href="/services/ecommerce-website.html">חנות אונליין</a>
+        <a href="/services/whatsapp-bot.html" class="active">בוט וואטסאפ</a>
+        <a href="/services/ai-receptionist.html">מזכירה AI</a>
+        <a href="/services/social-media-ai.html">סושיאל AI</a>
+        <a href="/services/appointments-clinics.html">תורים</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary nav-cta">דבר איתנו עכשיו 📲</a>
+    </div>
+  </header>
+
+  <section class="svc-hero">
+    <div class="container">
+      <a href="/" class="breadcrumb">← חזרה לעמוד הבית</a>
+      <div class="svc-hero-grid">
+        <div class="reveal">
+          <span class="eyebrow">💬 בוט וואטסאפ אוטומטי</span>
+          <h1>כל ליד שכותב לך — <span class="hl">מקבל תשובה תוך 5 שניות.</span></h1>
+          <p class="lead">הבוט עונה ללידים חדשים מיידית, שולח פרטים ומחיר, קובע שיחה או תור, ואם הם לא ענו — שולח פולואפ אוטומטי. אתה ממשיך לעבוד, הבוט סוגר עסקאות.</p>
+          <div class="hero-cta-row">
+            <a href="#contact" class="btn btn-primary btn-lg">קבל בוט וואטסאפ 🚀</a>
+            <a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">שאלה מהירה בוואטסאפ</a>
+          </div>
+          <p class="micro">מענה מיידי לכל ליד · פולואפ אוטומטי · קביעת תורים · מעקב שיחות</p>
+        </div>
+        <div class="chat-bubble-wrap reveal">
+          <div class="chat-label">⚡ דוגמה — קורה אוטומטית</div>
+          <div class="chat-bubble bubble-in">היי, כמה עולה X?</div>
+          <div class="bubble-time">22:47</div>
+          <div class="chat-bubble bubble-out">שלום! תודה שפנית 😊 X עולה מ-₪200. תרצה שאשלח לך את כל הפרטים?</div>
+          <div class="bubble-time">22:47 ✓✓</div>
+          <div class="chat-label">לאחר יום ללא מענה:</div>
+          <div class="chat-bubble bubble-out">היי! רציתי לבדוק — האם ראית את ההצעה? אני כאן לכל שאלה 🙂</div>
+          <div class="bubble-time">23:15 מחרת ✓✓</div>
+          <div class="chat-bubble bubble-in">כן! מתי אפשר לקבוע?</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="svc-section alt">
+    <div class="container">
+      <h2 class="section-title reveal">כמה לידים נפלו לך בין הכיסאות החודש?</h2>
+      <p class="section-sub reveal">כל ליד שלא ענית לו בזמן — הלך למתחרה שכן ענה:</p>
+      <div class="pain-grid">
+        <div class="pain-card reveal"><div class="pain-icon">⏰</div><p>ליד כתב לך ב-21:00. ראית ב-8:00. כבר קנה ממישהו אחר. זה קורה כמה פעמים בשבוע.</p></div>
+        <div class="pain-card reveal"><div class="pain-icon">🔇</div><p>ענית, שלחת מחיר, הם "ראו" ולא ענו. לא עשית פולואפ. עסקה שהלכה לאיבוד.</p></div>
+        <div class="pain-card reveal"><div class="pain-icon">😫</div><p>עונה ידנית לאותן שאלות 20 פעם ביום: "מה המחיר?", "יש X?", "תוך כמה זמן?" — מייגע.</p></div>
+        <div class="pain-card reveal"><div class="pain-icon">📱</div><p>בשישי בערב הודעות מצטברות. אתה חוזר רק אחרי שבת — רובם כבר מצאו פתרון.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="svc-section">
+    <div class="container">
+      <h2 class="section-title reveal">מה הבוט עושה בשבילך</h2>
+      <div class="feature-grid">
+        <div class="feature-card reveal"><div class="feature-icon">⚡</div><h3>מענה מיידי לכל ליד</h3><p>מישהו כתב "מחיר?" — בתוך 5 שניות הבוט עונה עם פרטים, תמחור וקישור להזמנה. 24/7.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">🔄</div><h3>פולואפ אוטומטי חכם</h3><p>ליד לא ענה אחרי 24 שעות? הבוט שולח הודעת המשך. לא ענה אחרי 3 ימים? שוב. ברגישות, לא בספאם.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">🗓️</div><h3>קביעת תורים והזמנות</h3><p>הבוט מציג זמינות, לקוח בוחר שעה, מקבל אישור. בלי שאתה נוגע בזה.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">🧠</div><h3>עונה על שאלות נפוצות</h3><p>מגדיר מה לענות על מה — הבוט יודע הכל על העסק שלך ועונה כמוך, רק יותר מהר.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">🏷️</h3><h3>תיוג לידים חמים</h3><p>מי שביקש מחיר — מתויג "חם". מי שביקש תור — "מתעניין". אתה מקבל לידים מסוננים.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">📊</div><h3>דוח שיחות שבועי</h3><p>כמה לידים נכנסו, כמה הבוט ענה עליהם, כמה הפכו ללקוחות — הכל בדוח שבועי.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTO FOLLOWUP SECTION -->
+  <section class="svc-section alt">
+    <div class="container">
+      <h2 class="section-title reveal">פולואפ אוטומטי — הכסף שטמון בלידים שלך</h2>
+      <p class="section-sub reveal">מחקרים מראים: 80% מהמכירות נסגרות לאחר 5+ נקודות מגע. מי מיישם את זה? הבוט שלך.</p>
+      <div class="steps-grid">
+        <div class="step-item reveal">
+          <div class="step-num-badge">יום 1</div>
+          <div class="step-icon">💬</div>
+          <h3>מענה מיידי</h3>
+          <p>ליד כותב → בוט עונה תוך שניות עם פרטים רלוונטיים ושאלת המשך.</p>
+        </div>
+        <div class="step-item reveal">
+          <div class="step-num-badge">יום 2</div>
+          <div class="step-icon">🔔</div>
+          <h3>תזכורת עדינה</h3>
+          <p>לא ענה? "היי, רציתי לוודא שראית את המידע ששלחתי. יש שאלות?" — פשוט, לא מחנק.</p>
+        </div>
+        <div class="step-item reveal">
+          <div class="step-num-badge">יום 5</div>
+          <div class="step-icon">🎁</div>
+          <h3>ערך מוסף + CTA</h3>
+          <p>עדיין לא סגר? "אגב, יש לנו X מיוחד השבוע — רוצה לנצל?" — נגיעה אחרונה חכמה.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="svc-section">
+    <div class="container">
+      <h2 class="section-title reveal">מתאים לכל עסק שמקבל פניות בוואטסאפ</h2>
+      <div class="who-grid">
+        <div class="who-card reveal"><span>🏗️</span><p>שיפוצניקים וקבלנים</p></div>
+        <div class="who-card reveal"><span>🍕</span><p>מסעדות ואוכל בהזמנה</p></div>
+        <div class="who-card reveal"><span>👗</span><p>בוטיקים ואופנה</p></div>
+        <div class="who-card reveal"><span>🏥</span><p>קליניקות ורופאים</p></div>
+        <div class="who-card reveal"><span>🎓</span><p>קורסים ומאמנים</p></div>
+        <div class="who-card reveal"><span>🚗</span><p>מוסכים ושירותי רכב</p></div>
+        <div class="who-card reveal"><span>💆</span><p>ספא וטיפולים</p></div>
+        <div class="who-card reveal"><span>🏠</span><p>נדל"ן ותיווך</p></div>
+        <div class="who-card reveal"><span>🐶</span><p>וטרינרים ומטפחי חיות</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="svc-section alt">
+    <div class="container">
+      <h2 class="section-title reveal">מה אומרים עלינו</h2>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-top">
+            <div class="avatar" style="background:#dc2626">ד</div>
+            <div class="testi-meta"><strong>דוד כהן</strong><span>שיפוצניק, ראשל"צ</span></div>
+          </div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>הבוט מקבל פניות כשאני על הגג עם הידיים מלוכלכות. חסך לי שעתיים ביום וסגר לי 3 עסקאות שהיו הולכות לאיבוד.</p>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-top">
+            <div class="avatar" style="background:#7c3aed">ס</div>
+            <div class="testi-meta"><strong>סמדר בן-עמי</strong><span>מאמנת תזונה, תל אביב</span></div>
+          </div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>הפולואפ האוטומטי שינה לי את המשחק. לקוחה שלא ענתה 3 ימים קיבלה הודעה — וסגרה. זה קורה כמה פעמים בשבוע עכשיו.</p>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-top">
+            <div class="avatar" style="background:#0369a1">י</div>
+            <div class="testi-meta"><strong>יגאל שמואלי</strong><span>מסעדה, חיפה</span></div>
+          </div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>הזמנות שולחן, שאלות תפריט, מבצעים — הכל דרך הבוט. חסכתי עובד שלם בקבלת הזמנות. ממליץ בחום.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="svc-section" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">בוא נפסיק לאבד לידים</h2>
+      <p class="section-sub reveal">השאר פרטים ונחזור אליך עם הצעה מותאמת לעסק שלך — בלי התחייבות.</p>
+      <div class="form-wrap reveal">
+        <form id="leadForm" novalidate>
+          <div class="form-group">
+            <label for="fullName">שם מלא <span class="req">*</span></label>
+            <input type="text" id="fullName" name="fullName" class="form-control" required />
+            <div class="field-error">נא למלא שם מלא</div>
+          </div>
+          <div class="form-group">
+            <label for="phone">טלפון <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="050-000-0000" required />
+            <div class="field-error">נא למלא מספר טלפון תקין</div>
+          </div>
+          <div class="form-group">
+            <label for="bizType">סוג העסק <span class="req">*</span></label>
+            <input type="text" id="bizType" name="bizType" class="form-control" placeholder="לדוגמה: שיפוצניק, מאמן, מסעדה..." required />
+            <div class="field-error">נא למלא סוג עסק</div>
+          </div>
+          <div class="form-group">
+            <label for="notes">כמה הודעות וואטסאפ אתה מקבל בממוצע ביום? מה בדרך כלל שואלים?</label>
+            <textarea id="notes" name="notes" class="form-control" placeholder="לדוגמה: 20-30 הודעות ביום, בעיקר שאלות מחיר וזמינות..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
+            <span class="spinner" id="spinner"></span>
+            <span id="btnLabel">שלח/י ונחזור אליך</span>
+          </button>
+        </form>
+        <div class="thank-you" id="thankYou">
+          <h3>תודה רבה! 🎉</h3>
+          <p>קיבלנו את הפרטים שלך ונחזור אליך בהקדם. רוצה לדבר עכשיו?</p>
+          <a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="btn btn-wa">פתח שיחה עכשיו →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="/" class="footer-logo">קדימ<span>ה</span></a>
+        <p class="footer-about">הופכים עסקים קטנים ובינוניים לדיגיטליים — אתרים, חנויות, בוטים ואוטומציות שעובדים בשבילך.</p>
+      </div>
+      <div>
+        <h4>שירותים</h4>
+        <ul>
+          <li><a href="/services/landing-website.html">אתר תדמית / דף נחיתה</a></li>
+          <li><a href="/services/ecommerce-website.html">חנות אונליין</a></li>
+          <li><a href="/services/whatsapp-bot.html">בוט וואטסאפ</a></li>
+          <li><a href="/services/google-reviews-bot.html">בוט ביקורות גוגל</a></li>
+          <li><a href="/services/ai-receptionist.html">מזכירה AI</a></li>
+          <li><a href="/services/social-media-ai.html">עובדת סושיאל AI</a></li>
+          <li><a href="/services/appointments-clinics.html">מערכת תורים</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>דברו איתנו</h4>
+        <ul>
+          <li><a href="tel:+972504593267">050-459-3267</a></li>
+          <li><a href="https://wa.me/972504593267" target="_blank" rel="noopener">כתוב לנו בוואטסאפ 💬</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><div class="container"><p>© 2026 קדימה. כל הזכויות שמורות.</p></div></div>
+  </footer>
+
+  <a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="whatsapp-float pulse" aria-label="דבר איתנו בוואטסאפ">
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.04c-.24.68-1.4 1.3-1.94 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-2.99 0-1.42.75-2.12 1.01-2.41.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.65.49.24.57.81 1.97.88 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.69-.81.87-1.09.18-.28.36-.23.61-.14.25.09 1.6.76 1.88.9.28.14.46.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+
+  <script src="/app.js"></script>
+</body>
+</html>
