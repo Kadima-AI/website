@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>קדימה | אתרים, בוטים ואוטומציות לעסקים קטנים בישראל</title>
+  <meta name="description" content="קדימה בונה אתרים מקצועיים, בוטים לוואטסאפ ואינסטגרם, ואוטומציות AI לעסקים קטנים בישראל. מוכן תוך 5 ימים, מ-800₪. התקשר עכשיו." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="קדימה | אתרים, בוטים ואוטומציות לעסקים קטנים בישראל" />
+  <meta property="og:description" content="קדימה בונה אתרים מקצועיים, בוטים לוואטסאפ ואינסטגרם, ואוטומציות AI לעסקים קטנים בישראל. מוכן תוך 5 ימים, מ-800₪." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Heebo -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "קדימה",
+    "description": "סוכנות AI לעסקים קטנים בישראל",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "בת ים",
+      "addressCountry": "IL"
+    },
+    "telephone": "+YOUR_PHONE_NUMBER",
+    "url": "https://kadima.co.il",
+    "priceRange": "₪₪"
+  }
+  </script>
+
+  <style>
+    :root {
+      --navy: #0F172A;
+      --navy-soft: #1E293B;
+      --blue: #3B82F6;
+      --blue-dark: #2563EB;
+      --gold: #F59E0B;
+      --white: #FFFFFF;
+      --text-light: #E2E8F0;
+      --muted: #94A3B8;
+      --section-light: #F8FAFC;
+      --text-dark: #1E293B;
+      --border-dark: rgba(148, 163, 184, 0.18);
+      --radius: 16px;
+      --shadow-blue: 0 12px 30px rgba(59, 130, 246, 0.28);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { line-height: 1.25; font-weight: 800; }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section { position: relative; }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 26px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .25s ease, background .2s ease, color .2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: var(--shadow-blue);
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,.55);
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: #1a1303; }
+    .btn-block { width: 100%; padding: 18px; font-size: 1.1rem; }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      z-index: 1000;
+      transition: background .3s ease, box-shadow .3s ease, padding .3s ease, backdrop-filter .3s ease;
+      padding: 16px 0;
+    }
+    .navbar.scrolled {
+      background: rgba(15, 23, 42, .82);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 24px rgba(0,0,0,.35);
+      padding: 10px 0;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo-wrap { display: flex; flex-direction: column; }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--blue); }
+    .logo-tag { font-size: .72rem; color: var(--muted); font-weight: 600; margin-top: 1px; }
+
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 70px;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(59,130,246,.22), transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(245,158,11,.12), transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(37,99,235,.18), transparent 55%),
+        var(--navy);
+      background-size: 200% 200%, 200% 200%, 200% 200%, auto;
+      animation: meshMove 16s ease-in-out infinite alternate;
+      overflow: hidden;
+    }
+    @keyframes meshMove {
+      0%   { background-position: 0% 0%, 100% 100%, 50% 50%, 0 0; }
+      100% { background-position: 30% 20%, 70% 80%, 60% 40%, 0 0; }
+    }
+    .hero-content { max-width: 760px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(59,130,246,.14);
+      border: 1px solid rgba(59,130,246,.4);
+      color: var(--text-light);
+      font-weight: 600;
+      font-size: .9rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .badge .check { color: var(--gold); }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      color: #fff;
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+    .hero h1 .hl { color: var(--blue); }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+      color: var(--text-light);
+      max-width: 620px;
+      margin-bottom: 34px;
+      text-wrap: pretty;
+    }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; }
+    .micro-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 22px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: .92rem;
+    }
+    .micro-badges span { display: inline-flex; align-items: center; gap: 6px; }
+    .micro-badges .check { color: var(--blue); font-weight: 800; }
+
+    /* ===== Section heads ===== */
+    .section-pad { padding: 84px 0; }
+    .section-head { text-align: center; max-width: 720px; margin: 0 auto 50px; }
+    .section-head h2 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      margin-bottom: 14px;
+      text-wrap: balance;
+    }
+    .light { background: var(--section-light); color: var(--text-dark); }
+    .light .section-head h2 { color: var(--text-dark); }
+    .dark-sec { background: var(--navy); color: var(--text-light); }
+    .dark-soft { background: var(--navy-soft); }
+
+    /* ===== Two-audience split ===== */
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .aud-card {
+      border-radius: var(--radius);
+      padding: 38px 32px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .aud-card:hover { transform: translateY(-4px); }
+    .aud-a {
+      background: #fff;
+      color: var(--text-dark);
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+    }
+    .aud-b {
+      background: var(--navy);
+      color: var(--text-light);
+      border: 1px solid var(--border-dark);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .aud-icon { font-size: 2.6rem; margin-bottom: 14px; }
+    .aud-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
+    .aud-a h3 { color: var(--text-dark); }
+    .aud-b h3 { color: #fff; }
+    .aud-card p { margin-bottom: 22px; }
+    .aud-a p { color: #475569; }
+    .aud-b p { color: var(--text-light); }
+    .aud-link {
+      font-weight: 700;
+      color: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap .2s ease;
+    }
+    .aud-link:hover { gap: 12px; }
+
+    /* ===== Services ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .service-card {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-right: 3px solid transparent;
+      border-radius: var(--radius);
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: -6px 12px 34px rgba(59,130,246,.22);
+      border-right-color: var(--blue);
+    }
+    .service-icon { font-size: 2.4rem; margin-bottom: 14px; }
+    .service-card h3 { font-size: 1.25rem; color: #fff; margin-bottom: 10px; }
+    .service-card p { color: var(--muted); flex-grow: 1; margin-bottom: 18px; }
+    .price-badge {
+      align-self: flex-start;
+      background: rgba(245,158,11,.14);
+      border: 1px solid rgba(245,158,11,.4);
+      color: var(--gold);
+      font-weight: 700;
+      font-size: .85rem;
+      padding: 7px 14px;
+      border-radius: 999px;
+    }
+
+    /* ===== Why SEO ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-bottom: 44px;
+    }
+    .stat-box {
+      background: var(--navy);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      padding: 32px 26px;
+      text-align: center;
+    }
+    .stat-num { font-size: 2.8rem; font-weight: 800; color: var(--blue); margin-bottom: 10px; }
+    .stat-box p { color: var(--text-light); font-weight: 600; }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(15,23,42,.08);
+    }
+    .compare-table th, .compare-table td {
+      padding: 16px 20px;
+      text-align: right;
+      font-size: 1rem;
+    }
+    .compare-table thead th { font-size: 1.1rem; font-weight: 800; }
+    .compare-table thead th:first-child { background: #e2e8f0; color: #64748b; }
+    .compare-table thead th:last-child { background: var(--blue); color: #fff; }
+    .compare-table tbody tr { background: #fff; }
+    .compare-table tbody tr:nth-child(even) { background: #f1f5f9; }
+    .compare-table td:first-child { color: #94a3b8; border-left: 1px solid #e2e8f0; }
+    .compare-table td:last-child { color: var(--text-dark); font-weight: 600; }
+    .compare-table td:last-child::before { content: "✓ "; color: #16a34a; font-weight: 800; }
+
+    /* ===== How it works ===== */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+    .step {
+      text-align: center;
+      padding: 0 10px;
+      position: relative;
+    }
+    .step-circle {
+      width: 78px; height: 78px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      background: rgba(59,130,246,.12);
+      border: 2px solid var(--blue);
+    }
+    .step-num {
+      display: inline-block;
+      background: var(--gold);
+      color: #1a1303;
+      font-weight: 800;
+      font-size: .8rem;
+      width: 26px; height: 26px; line-height: 26px;
+      border-radius: 50%;
+      margin-bottom: 8px;
+    }
+    .step h3 { font-size: 1.25rem; color: var(--text-dark); margin-bottom: 8px; }
+    .step p { color: #475569; }
+
+    /* ===== Testimonials ===== */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .testi-card {
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      padding: 30px 26px;
+    }
+    .testi-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.3rem; color: #fff;
+      flex-shrink: 0;
+    }
+    .testi-meta strong { color: #fff; display: block; font-size: 1rem; }
+    .stars { color: var(--gold); margin-bottom: 12px; letter-spacing: 2px; }
+    .testi-card p { color: var(--text-light); }
+
+    /* ===== Lead form ===== */
+    .form-section {
+      background:
+        radial-gradient(circle at 80% 0%, rgba(59,130,246,.18), transparent 45%),
+        var(--navy);
+    }
+    .form-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--navy-soft);
+      border: 1px solid var(--border-dark);
+      border-radius: 22px;
+      padding: 40px 34px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--text-light); }
+    .req { color: var(--gold); }
+    .form-control {
+      width: 100%;
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-dark);
+      background: var(--navy);
+      color: #fff;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .form-control::placeholder { color: #64748b; }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.18);
+    }
+    select.form-control { cursor: pointer; }
+    textarea.form-control { resize: vertical; min-height: 90px; }
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 18px;
+    }
+    .check-item {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--navy);
+      border: 1.5px solid var(--border-dark);
+      border-radius: 12px;
+      padding: 11px 14px;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+      font-weight: 600;
+    }
+    .check-item:hover { border-color: var(--blue); }
+    .check-item input { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
+    .field-error { color: #f87171; font-size: .85rem; margin-top: 6px; display: none; }
+    .form-control.invalid { border-color: #f87171; }
+
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .thank-you {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .thank-you.show { display: block; animation: fadeUp .5s ease; }
+    .thank-you h3 { font-size: 1.7rem; color: #fff; margin-bottom: 14px; }
+    .thank-you p { color: var(--text-light); margin-bottom: 26px; font-size: 1.1rem; }
+
+    .wa-fallback { text-align: center; margin-top: 28px; color: var(--text-light); }
+    .wa-fallback p { margin-bottom: 12px; font-weight: 600; }
+    .btn-wa { background: #25D366; color: #053a1c; }
+    .btn-wa:hover { background: #1ebe5a; transform: translateY(-2px); }
+    .pulse { animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); }
+      70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+
+    /* ===== Footer ===== */
+    footer { background: #0a0f1d; padding: 56px 0 0; border-top: 1px solid var(--border-dark); }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 34px;
+      padding-bottom: 40px;
+    }
+    .footer-brand .logo { margin-bottom: 8px; }
+    .footer-brand p { color: var(--muted); max-width: 280px; }
+    footer h4 { color: #fff; font-size: 1.1rem; margin-bottom: 16px; }
+    footer ul { list-style: none; }
+    footer li { margin-bottom: 10px; }
+    footer a, footer li { color: var(--muted); transition: color .2s ease; }
+    footer a:hover { color: var(--blue); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-dark);
+      padding: 20px 0;
+      text-align: center;
+      color: #64748b;
+      font-size: .9rem;
+    }
+
+    /* ===== Reveal animation ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 880px) {
+      .services-grid, .stats-grid, .steps, .testi-grid { grid-template-columns: 1fr; }
+      .split-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 26px; }
+    }
+    @media (max-width: 600px) {
+      .section-pad { padding: 60px 0; }
+      .logo-tag { display: none; }
+      .checks { grid-template-columns: 1fr; }
+      .hero-ctas .btn { flex: 1; }
+      .navbar .nav-cta { padding: 11px 18px; font-size: .9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <div class="logo-wrap">
+        <a href="#" class="logo">קדימ<span>ה</span></a>
+        <span class="logo-tag">הדיגיטל שעובד בשבילך — לא נגדך</span>
+      </div>
+      <a href="#contact" class="btn btn-primary nav-cta">דבר איתנו עכשיו 📲</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="badge"><span class="check">✓</span> מעל 20 עסקים מרוצים בישראל</span>
+          <h1>הלקוחות שלך מחפשים אותך בגוגל. <span class="hl">האם הם מוצאים אותך?</span></h1>
+          <p class="hero-sub">אנחנו בונים אתרים, בוטים ואוטומציות לעסקים קטנים בישראל. מהר. בזול. בלי שתצטרך להבין בזה כלום.</p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-primary">קבל הצעת מחיר חינם 🚀</a>
+            <a href="#services" class="btn btn-outline">מה אנחנו מציעים?</a>
+          </div>
+          <div class="micro-badges">
+            <span><span class="check">✓</span> אתר מוכן תוך 5 ימים</span>
+            <span><span class="check">✓</span> תמיכה בוואטסאפ</span>
+            <span><span class="check">✓</span> ללא התחייבות</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TWO-AUDIENCE SPLIT ===== -->
+    <section class="section-pad light" id="start">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>לא משנה איפה אתה מתחיל — יש לנו דרך בשבילך</h2>
+        </div>
+        <div class="split-grid">
+          <div class="aud-card aud-a reveal">
+            <div class="aud-icon">🌱</div>
+            <h3>אתחיל מאפס?</h3>
+            <p>מעולה. זה בדיוק המקום להתחיל. ניבנה לך דף נחיתה מקצועי שנראה כאילו השקעת המון — תוך 5 ימים, מ-800₪. אתה לא צריך להבין כלום.</p>
+            <a href="#services" class="aud-link">הצג לי את הדף הבסיסי ↓</a>
+          </div>
+          <div class="aud-card aud-b reveal">
+            <div class="aud-icon">🤖</div>
+            <h3>מוכן לשלב הבא?</h3>
+            <p>בוטים שמוכרים בשבילך, אוטומציות שחוסכות שעות, AI שעונה ללקוחות כשאתה ישן. אנחנו מחברים את כל זה לעסק שלך.</p>
+            <a href="#services" class="aud-link">הצג לי את הפתרונות המתקדמים ↓</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section-pad dark-sec" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 style="color:#fff">מה אנחנו בונים לעסקים כמוך</h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon">🌐</div>
+            <h3>אתר מקצועי לעסק</h3>
+            <p>מותאם למובייל, בעברית, עם כפתור וואטסאפ ישיר. נראה כמו שהשקעת ₪20,000 — עולה הרבה פחות.</p>
+            <span class="price-badge">מ-800₪ | מוכן תוך 5 ימים</span>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">🤖</div>
+            <h3>בוט לידים לאינסטגרם ו-WhatsApp</h3>
+            <p>כל מי שכותב 'מחיר?' מקבל תשובה מיידית + פרטים שלו מגיעים אליך. אפס עבודה ידנית.</p>
+            <span class="price-badge">מ-1,200₪ | הגדרה תוך 48 שעות</span>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">📞</div>
+            <h3>מזכירה AI — מענה טלפוני אוטומטי</h3>
+            <p>הטלפון מצלצל כשאתה עם לקוח — הבוט עונה, קובע תור, ושולח לך סיכום בוואטסאפ.</p>
+            <span class="price-badge">מ-1,500₪ | חוסך 2-3 שעות ביום</span>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">📱</div>
+            <h3>תוכן לסושיאל מדיה עם AI</h3>
+            <p>30 פוסטים בחודש, מוכנים מראש, בעברית, מותאמים לעסק שלך. תאשר ותפרסם — זה הכל.</p>
+            <span class="price-badge">מ-500₪/חודש | ללא התחייבות</span>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">🔍</div>
+            <h3>דירוג בגוגל — SEO מקומי</h3>
+            <p>כשמישהו מחפש 'שיפוצניק בבת ים' — את/ה צריך/ה להיות ראשון. אנחנו דואגים לזה.</p>
+            <span class="price-badge">מ-600₪ | תוצאות תוך 60 יום</span>
+          </div>
+          <div class="service-card reveal">
+            <div class="service-icon">⚙️</div>
+            <h3>אוטומציות לעסק</h3>
+            <p>חשבוניות אוטומטיות, תזכורות ללקוחות, מעקב הזמנות — כל מה שאתה עושה ידנית היום.</p>
+            <span class="price-badge">מ-1,000₪ | תלוי בהיקף</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHY SEO ===== -->
+    <section class="section-pad light" id="why-seo">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>למה חשוב שימצאו אותך בגוגל?</h2>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-box reveal">
+            <div class="stat-num">97%</div>
+            <p>מהאנשים מחפשים עסק מקומי בגוגל לפני שהם מתקשרים</p>
+          </div>
+          <div class="stat-box reveal">
+            <div class="stat-num">3.2 שניות</div>
+            <p>זה הזמן שלקוח מחכה לטעינת דף לפני שהוא עוזב לתמיד</p>
+          </div>
+          <div class="stat-box reveal">
+            <div class="stat-num">×5</div>
+            <p>יותר לידים מגיעים לאתר מקצועי לעומת רק מספר וואטסאפ</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>בלי אתר / SEO</th>
+                <th>עם קדימה</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>לקוח מחפש בגוגל — לא מוצא אותך</td><td>מופיע בתוצאה הראשונה</td></tr>
+              <tr><td>כרטיס ביקור = נייר זרוק</td><td>כרטיס ביקור = אתר חי 24/7</td></tr>
+              <tr><td>מסתמך על המלצות בלבד</td><td>לידים חדשים כל יום</td></tr>
+              <tr><td>מפרסם בפייסבוק — שולח לוואטסאפ</td><td>מפרסם — שולח לדף שממיר</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="section-pad" id="how-it-works" style="background:#fff;color:var(--text-dark)">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>איך זה עובד — 3 צעדים פשוטים</h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-circle">☎️</div>
+            <span class="step-num">1</span>
+            <h3>שיחה חינם של 15 דקות</h3>
+            <p>מסביר לנו מה העסק שלך, מה חסר, מה רוצה. לא צריך להכין כלום.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-circle">🛠️</div>
+            <span class="step-num">2</span>
+            <h3>אנחנו בונים — אתה ממשיך לעבוד</h3>
+            <p>אנחנו מטפלים בהכל: עיצוב, כתיבה בעברית, טכנולוגיה, SEO. אתה לא נוגע בזה.</p>
+          </div>
+          <div class="step reveal">
+            <div class="step-circle">🚀</div>
+            <span class="step-num">3</span>
+            <h3>עולה לאוויר + תמיכה שוטפת</h3>
+            <p>מקבל הכל עובד, ואנחנו זמינים בוואטסאפ לכל שאלה. לא נעלמים אחרי המסירה.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section-pad dark-soft" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 style="color:#fff">מה אומרים עלינו</h2>
+        </div>
+        <div class="testi-grid">
+          <div class="testi-card reveal">
+            <div class="testi-top">
+              <div class="avatar" style="background:#7c3aed">ר</div>
+              <div class="testi-meta"><strong>רחל, בת ים</strong><span style="color:var(--muted)">מאפייה</span></div>
+            </div>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>לא האמנתי שיהיה לי אתר תוך שבוע. עכשיו לקוחות מוצאים אותי בגוגל ומתקשרים. שווה כל שקל.</p>
+          </div>
+          <div class="testi-card reveal">
+            <div class="testi-top">
+              <div class="avatar" style="background:#3B82F6">ד</div>
+              <div class="testi-meta"><strong>דוד, ראשון לציון</strong><span style="color:var(--muted)">שיפוצים</span></div>
+            </div>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>הבוט בוואטסאפ מקבל פניות כשאני על הגג. חסך לי שעתיים ביום לפחות. ממליץ בחום.</p>
+          </div>
+          <div class="testi-card reveal">
+            <div class="testi-top">
+              <div class="avatar" style="background:#16a34a">מ</div>
+              <div class="testi-meta"><strong>מיכל, תל אביב</strong><span style="color:var(--muted)">קליניקה</span></div>
+            </div>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>ביקשתי אתר עם קביעת תורים. קיבלתי בדיוק מה שרציתי תוך 4 ימים. מקצועיים ברמה אחרת.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LEAD FORM ===== -->
+    <section class="section-pad form-section" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 style="color:#fff">מוכן להתחיל? נחזור אליך תוך שעה</h2>
+          <p style="color:var(--text-light);font-size:1.1rem">שיחת ייעוץ ראשונה — חינם לחלוטין. ללא התחייבות.</p>
+        </div>
+
+        <div class="form-wrap reveal">
+          <form id="leadForm" novalidate>
+            <div class="form-group">
+              <label for="fullName">שם מלא <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" class="form-control" required />
+              <div class="field-error">נא למלא שם מלא</div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">מספר טלפון <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" class="form-control" placeholder="050-000-0000" required />
+              <div class="field-error">נא למלא מספר טלפון תקין</div>
+            </div>
+
+            <div class="form-group">
+              <label for="bizType">סוג העסק <span class="req">*</span></label>
+              <select id="bizType" name="bizType" class="form-control" required>
+                <option value="">בחר/י סוג עסק...</option>
+                <option>מספרה/סלון יופי</option>
+                <option>מאפייה/קפה</option>
+                <option>מסעדה</option>
+                <option>שיפוצים/בנייה</option>
+                <option>קליניקה/רפואה</option>
+                <option>חנות בגדים</option>
+                <option>חנות חשמל</option>
+                <option>מאמן/ת כושר</option>
+                <option>עורך/ת דין/רואה חשבון</option>
+                <option>אחר</option>
+              </select>
+              <div class="field-error">נא לבחור סוג עסק</div>
+            </div>
+
+            <div class="form-group">
+              <label>מה מעניין אותך?</label>
+              <div class="checks">
+                <label class="check-item"><input type="checkbox" name="interest" value="אתר / דף נחיתה" /> אתר / דף נחיתה</label>
+                <label class="check-item"><input type="checkbox" name="interest" value="בוט לאינסטגרם / וואטסאפ" /> בוט לאינסטגרם / וואטסאפ</label>
+                <label class="check-item"><input type="checkbox" name="interest" value="מזכירה AI" /> מזכירה AI</label>
+                <label class="check-item"><input type="checkbox" name="interest" value="תוכן לסושיאל" /> תוכן לסושיאל</label>
+                <label class="check-item"><input type="checkbox" name="interest" value="דירוג בגוגל" /> דירוג בגוגל</label>
+                <label class="check-item"><input type="checkbox" name="interest" value="אוטומציות" /> אוטומציות</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">הערות / שאלות</label>
+              <textarea id="notes" name="notes" class="form-control" placeholder="ספר לנו קצת על העסק שלך..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+              <span class="spinner" id="spinner"></span>
+              <span id="submitText">שלח — נחזור אליך תוך שעה ✅</span>
+            </button>
+          </form>
+
+          <div class="thank-you" id="thankYou">
+            <h3>תודה! קיבלנו את הפנייה שלך 🎉</h3>
+            <p>נחזור אליך תוך שעה בוואטסאפ. בינתיים — שמור את המספר שלנו 💬</p>
+            <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" rel="noopener" class="btn btn-wa">פתח שיחה עכשיו →</a>
+          </div>
+        </div>
+
+        <div class="wa-fallback reveal">
+          <p>מעדיף לכתוב ישירות? 💬</p>
+          <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" rel="noopener" class="btn btn-wa pulse">כתוב לנו בוואטסאפ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">קדימ<span style="color:var(--blue)">ה</span></div>
+          <p>הדיגיטל שעובד בשבילך — לא נגדך. אתרים, בוטים ואוטומציות לעסקים קטנים בישראל.</p>
+        </div>
+        <div>
+          <h4>שירותים</h4>
+          <ul>
+            <li><a href="#services">אתר מקצועי לעסק</a></li>
+            <li><a href="#services">בוט לידים</a></li>
+            <li><a href="#services">מזכירה AI</a></li>
+            <li><a href="#services">תוכן לסושיאל</a></li>
+            <li><a href="#services">דירוג בגוגל</a></li>
+            <li><a href="#services">אוטומציות לעסק</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>צור קשר</h4>
+          <ul>
+            <li><a href="tel:+YOUR_PHONE_NUMBER">YOUR_PHONE_NUMBER</a></li>
+            <li><a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" rel="noopener">כתוב לנו בוואטסאפ 💬</a></li>
+            <li>בת ים, ישראל</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        קדימה © 2026 | כל הזכויות שמורות | בנוי עם ❤️ ובינה מלאכותית
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Navbar scroll state =====
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    }, { passive: true });
+
+    // ===== Intersection Observer reveal =====
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+
+    // ===== Form validation + submit =====
+    var form = document.getElementById('leadForm');
+    var submitBtn = document.getElementById('submitBtn');
+    var spinner = document.getElementById('spinner');
+    var submitText = document.getElementById('submitText');
+    var thankYou = document.getElementById('thankYou');
+
+    function setError(input, show) {
+      var err = input.parentElement.querySelector('.field-error');
+      if (err) err.style.display = show ? 'block' : 'none';
+      input.classList.toggle('invalid', show);
+    }
+
+    var requiredFields = ['fullName', 'phone', 'bizType'];
+
+    requiredFields.forEach(function (id) {
+      var el = document.getElementById(id);
+      el.addEventListener('input', function () { if (el.value.trim()) setError(el, false); });
+      el.addEventListener('change', function () { if (el.value.trim()) setError(el, false); });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var valid = true;
+
+      requiredFields.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el.value.trim()) { setError(el, true); valid = false; }
+      });
+
+      var phone = document.getElementById('phone');
+      var digits = phone.value.replace(/\D/g, '');
+      if (phone.value.trim() && digits.length < 9) { setError(phone, true); valid = false; }
+
+      if (!valid) return;
+
+      // Loading state
+      spinner.style.display = 'inline-block';
+      submitText.textContent = 'שולח...';
+      submitBtn.disabled = true;
+
+      setTimeout(function () {
+        form.style.display = 'none';
+        thankYou.classList.add('show');
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
