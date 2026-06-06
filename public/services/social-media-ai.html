@@ -3,56 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>שירי — עובדת הסושיאל המדיה ה-AI שלך | קדימה</title>
+  <title>שירי — עובדת הסושיאל מדיה ה-AI שלך | קדימה</title>
   <meta name="description" content="שירי היא עובדת AI שמנהלת לך את הסושיאל מדיה 24/7 — פוסטים, סטוריז, תגובות ותוכן שמושך לקוחות. מ-499₪/חודש." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
   <style>
-    .shiri-hero {
-      background: linear-gradient(135deg, #0F172A 0%, #1e1040 50%, #0F172A 100%);
+    .worker-hero {
+      background: linear-gradient(135deg, #0F172A 0%, #1a0f33 50%, #0F172A 100%);
       position: relative;
       overflow: hidden;
     }
-    .shiri-hero::before {
+    .worker-hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 30%, rgba(139,92,246,.25), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(236,72,153,.18), transparent 40%);
+        radial-gradient(circle at 15% 30%, rgba(139,92,246,.28), transparent 45%),
+        radial-gradient(circle at 85% 70%, rgba(236,72,153,.2), transparent 45%);
       animation: meshMove 14s ease-in-out infinite alternate;
     }
-    .shiri-card {
-      background: linear-gradient(135deg, rgba(139,92,246,.15), rgba(236,72,153,.12));
-      border: 1px solid rgba(139,92,246,.4);
-      border-radius: 20px;
-      padding: 28px 24px;
-      min-width: 220px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+
+    /* ===== Persona Card ===== */
+    .persona-card {
+      background: linear-gradient(160deg, rgba(139,92,246,.12), rgba(236,72,153,.08));
+      border: 1px solid rgba(139,92,246,.35);
+      border-radius: 24px;
+      padding: 0;
+      min-width: 260px;
+      max-width: 300px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(139,92,246,.2);
       position: relative;
+      z-index: 1;
     }
-    .shiri-avatar {
-      width: 80px; height: 80px;
-      background: linear-gradient(135deg, #7c3aed, #db2777);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem;
-      margin: 0 auto 12px;
-      box-shadow: 0 0 30px rgba(139,92,246,.4);
+    .persona-photo {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
-    .shiri-name { text-align: center; font-weight: 800; font-size: 1.3rem; color: #fff; }
-    .shiri-title { text-align: center; font-size: .85rem; color: #a78bfa; font-weight: 600; }
-    .shiri-stat { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(139,92,246,.2); }
-    .shiri-stat:last-child { border-bottom: none; }
-    .shiri-stat span:first-child { color: var(--muted); font-size: .88rem; }
-    .shiri-stat span:last-child { color: #a78bfa; font-weight: 700; }
-    .purple { color: #a78bfa; }
-    .feature-card.purple-card { border-color: rgba(139,92,246,.3); }
-    .feature-card.purple-card:hover { border-color: #7c3aed; box-shadow: 0 12px 32px rgba(139,92,246,.2); }
+    .persona-body {
+      padding: 18px 20px 22px;
+    }
+    .persona-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .persona-role {
+      font-size: .82rem;
+      color: #a78bfa;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .persona-tag {
+      background: rgba(139,92,246,.18);
+      border: 1px solid rgba(139,92,246,.35);
+      color: #c4b5fd;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .persona-divider { border: none; border-top: 1px solid rgba(139,92,246,.2); margin: 12px 0; }
+    .persona-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .83rem;
+      margin-bottom: 6px;
+    }
+    .persona-stat-row span:first-child { color: var(--muted); }
+    .persona-stat-row span:last-child { color: #a78bfa; font-weight: 700; }
+    .persona-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(74,222,128,.12);
+      border: 1px solid rgba(74,222,128,.3);
+      color: #4ade80;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-top: 12px;
+    }
+
+    .hl-purple { color: #a78bfa; }
+    .feature-card.purple-card { border-color: rgba(139,92,246,.25); }
+    .feature-card.purple-card:hover { border-color: #7c3aed; box-shadow: 0 12px 32px rgba(139,92,246,.22); }
   </style>
 </head>
 <body>
@@ -66,89 +115,99 @@
       <nav class="nav-links">
         <a href="/services/landing-website.html">אתר תדמית</a>
         <a href="/services/ecommerce-website.html">חנות אונליין</a>
-        <a href="/services/whatsapp-bot.html">בוט וואטסאפ</a>
-        <a href="/services/ai-receptionist.html">מזכירה AI</a>
-        <a href="/services/social-media-ai.html" class="active">סושיאל AI</a>
+        <a href="/services/whatsapp-bot.html">נועה — בוט וואטסאפ</a>
+        <a href="/services/ai-receptionist.html">דנה — מזכירה AI</a>
+        <a href="/services/social-media-ai.html" class="active">שירי — סושיאל AI</a>
         <a href="/services/appointments-clinics.html">תורים</a>
       </nav>
       <a href="#contact" class="btn btn-primary nav-cta">דבר איתנו עכשיו 📲</a>
     </div>
   </header>
 
-  <section class="svc-hero shiri-hero">
+  <section class="svc-hero worker-hero">
     <div class="container" style="position:relative;z-index:1">
       <a href="/" class="breadcrumb">← חזרה לעמוד הבית</a>
       <div class="svc-hero-grid">
         <div class="reveal">
-          <span class="eyebrow" style="background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.5)">📱 עובדת הסושיאל המדיה ה-AI שלך</span>
-          <h1>הכירו את <span style="color:#a78bfa">שירי</span> — היא מנהלת לך את הסושיאל <span class="hl">24/7</span></h1>
-          <p class="lead">שירי היא עובדת AI שחיה על אינסטגרם, פייסבוק וטיקטוק. היא יוצרת פוסטים, כותבת כיתובים, מפרסמת, מגיבה ומושכת לקוחות — בזמן שאתה מנהל את העסק האמיתי שלך.</p>
+          <span class="eyebrow" style="background:rgba(139,92,246,.18);border-color:rgba(139,92,246,.5)">📱 עובדת הסושיאל מדיה ה-AI שלך</span>
+          <h1>הכירו את <span class="hl-purple">שירי</span> — מנהלת הסושיאל שלך <span class="hl">24/7</span></h1>
+          <p class="lead">שירי עובדת בשבילך כל הזמן — יוצרת פוסטים, מעלה סטוריז, מגיבה, מושכת לקוחות — ולא עוזבת לטיול בחו"ל. היא עולה פחות ממתמחה, ואף פעם לא "שכחתי לפרסם".</p>
           <div class="hero-cta-row">
-            <a href="#contact" class="btn btn-lg" style="background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;box-shadow:0 12px 30px rgba(139,92,246,.35)">שכור את שירי 🔥</a>
+            <a href="#contact" class="btn btn-lg" style="background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;box-shadow:0 12px 30px rgba(139,92,246,.4)">שכור את שירי 🔥</a>
             <a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">שאלה מהירה בוואטסאפ</a>
           </div>
-          <p class="micro">30 פוסטים בחודש · סטוריז יומיים · ריל ו-TikTok · בעברית · ללא התחייבות</p>
+          <p class="micro">30+ פוסטים בחודש · סטוריז יומיים · ריל ו-TikTok · בעברית שוטפת · ללא התחייבות</p>
         </div>
-        <div class="shiri-card reveal">
-          <div class="shiri-avatar">👧</div>
-          <div class="shiri-name">שירי 🤖✨</div>
-          <div class="shiri-title">עובדת סושיאל מדיה AI</div>
-          <div class="shiri-stat"><span>שעות עבודה</span><span>24/7 😤</span></div>
-          <div class="shiri-stat"><span>פוסטים בחודש</span><span>30+</span></div>
-          <div class="shiri-stat"><span>מחיר/חודש</span><span>מ-499₪</span></div>
-          <div class="shiri-stat"><span>חופשות</span><span>אין 💅</span></div>
+
+        <div class="persona-card reveal">
+          <img
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_3DfVFH4dDdKyiVh1GZwweOKkZ3d/hf_20260606_183249_a031649e-66f7-449b-92ca-55b9b7c7a6a3_min.webp"
+            alt="שירי — עובדת סושיאל מדיה AI"
+            class="persona-photo"
+          />
+          <div class="persona-body">
+            <div class="persona-name">שירי ✨</div>
+            <div class="persona-role">עובדת סושיאל מדיה AI — קדימה</div>
+            <div class="persona-tags">
+              <span class="persona-tag">אינסטגרם</span>
+              <span class="persona-tag">פייסבוק</span>
+              <span class="persona-tag">TikTok</span>
+              <span class="persona-tag">ריל</span>
+            </div>
+            <hr class="persona-divider" />
+            <div class="persona-stat-row"><span>שעות עבודה</span><span>24/7 😤</span></div>
+            <div class="persona-stat-row"><span>פוסטים/חודש</span><span>30+</span></div>
+            <div class="persona-stat-row"><span>עלות</span><span>מ-499₪/חודש</span></div>
+            <div class="persona-stat-row"><span>חופשות שנתיות</span><span>0 💅</span></div>
+            <div class="persona-badge">🟢 זמינה עכשיו</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROBLEM -->
   <section class="svc-section alt">
     <div class="container">
-      <h2 class="section-title reveal">הסושיאל מדיה שלך נראית... כמו של עסק שמת?</h2>
-      <p class="section-sub reveal">כולם יודעים שצריך לפרסם. אף אחד אין לו זמן. ולכן:</p>
+      <h2 class="section-title reveal">הסושיאל שלך נראה כאילו העסק מת?</h2>
+      <p class="section-sub reveal">כולם יודעים שצריך לפרסם. אף אחד לא מפרסם. ולכן:</p>
       <div class="pain-grid">
-        <div class="pain-card reveal"><div class="pain-icon">😴</div><p>הפוסט האחרון שלך היה לפני 3 שבועות. הדף נראה כאילו העסק נסגר.</p></div>
-        <div class="pain-card reveal"><div class="pain-icon">🤦</div><p>אתה יושב שעה לכתוב פוסט, הוא לא מוצא חן בעיניך, ובסוף לא מפרסם כלום.</p></div>
-        <div class="pain-card reveal"><div class="pain-icon">📉</div><p>המתחרה שלך מפרסם כל יום — וגדל. אתה עומד במקום כי אין לך זמן לתוכן.</p></div>
-        <div class="pain-card reveal"><div class="pain-icon">💰</div><p>שכרת "בחורה שעושה סושיאל" ב-2,000₪ — פרסמה שבועיים וקיבלה עבודה ממשית.</p></div>
+        <div class="pain-card reveal"><div class="pain-icon">😴</div><p>הפוסט האחרון היה לפני 3 שבועות. הדף נראה כאילו העסק נסגר.</p></div>
+        <div class="pain-card reveal"><div class="pain-icon">🤦</div><p>יושב שעה לכתוב פוסט, לא מוצא חן בעיניך, ובסוף לא מפרסם בכלל.</p></div>
+        <div class="pain-card reveal"><div class="pain-icon">📉</div><p>המתחרה שלך מפרסם כל יום וגדל. אתה עומד במקום כי אין לך זמן.</p></div>
+        <div class="pain-card reveal"><div class="pain-icon">💸</div><p>שכרת "בחורה שעושה סושיאל" — פרסמה שבועיים וקיבלה עבודה אחרת.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- WHAT SHIRI DOES -->
   <section class="svc-section">
     <div class="container">
       <h2 class="section-title reveal">מה שירי עושה בשבילך כל חודש</h2>
-      <p class="section-sub reveal">שירי לא רק "עושה פוסטים" — היא מנהלת אסטרטגיה שלמה:</p>
       <div class="feature-grid">
-        <div class="feature-card purple-card reveal"><div class="feature-icon">📸</div><h3>30 פוסטים / חודש</h3><p>תמונות, גרפיקות, קרוסלות ותוכן שמוכר — מותאם לסגנון ולקהל של העסק שלך.</p></div>
-        <div class="feature-card purple-card reveal"><div class="feature-icon">🎥</div><h3>ריל ו-TikTok</h3><p>הפורמט הכי ויראלי ב-2025. שירי יוצרת סקריפטים, כיתובים וסאונדטראקים לסרטונים שלך.</p></div>
-        <div class="feature-card purple-card reveal"><div class="feature-icon">📖</div><h3>סטוריז יומיים</h3><p>תוכן אינטראקטיבי — סקרים, שאלות, קאונטדאון מבצעים — שמחזיק את הקהל פעיל.</p></div>
-        <div class="feature-card purple-card reveal"><div class="feature-icon">🗓️</div><h3>לוח תוכן חודשי</h3><p>רואה מראש מה יפורסם מתי. אתה מאשר, היא מפרסמת. שליטה מלאה בידיים שלך.</p></div>
-        <div class="feature-card purple-card reveal"><div class="feature-icon">💬</div><h3>תגובות ו-DMs</h3><p>שירי מגיבה בשמך על תגובות, שולחת תשובות ל-DMs ראשוניים ומעבירה לידים חמים אליך.</p></div>
-        <div class="feature-card purple-card reveal"><div class="feature-icon">📊</div><h3>דוח חודשי</h3><p>מה עבד, מה לא, מי הקהל שלך, כמה אנשים הגיעו לעסק דרך הסושיאל.</p></div>
+        <div class="feature-card purple-card reveal"><div class="feature-icon">📸</div><h3>30+ פוסטים / חודש</h3><p>תמונות, גרפיקות, קרוסלות ותוכן שמוכר — בסגנון ובצבעים של העסק שלך.</p></div>
+        <div class="feature-card purple-card reveal"><div class="feature-icon">🎥</div><h3>ריל ו-TikTok</h3><p>הפורמט הכי ויראלי. שירי כותבת סקריפטים, כיתובים וסאונד לסרטונים שלך.</p></div>
+        <div class="feature-card purple-card reveal"><div class="feature-icon">📖</div><h3>סטוריז יומיים</h3><p>סקרים, שאלות, קאונטדאון מבצעים — שמחזיקים את הקהל חי ופעיל.</p></div>
+        <div class="feature-card purple-card reveal"><div class="feature-icon">🗓️</div><h3>לוח תוכן חודשי</h3><p>רואה מראש מה יפורסם מתי. אתה מאשר — היא מפרסמת. שליטה מלאה בידיים שלך.</p></div>
+        <div class="feature-card purple-card reveal"><div class="feature-icon">💬</div><h3>תגובות ו-DMs</h3><p>שירי מגיבה בשמך, שולחת תשובות ל-DMs ראשוניים ומעבירה לידים חמים אליך.</p></div>
+        <div class="feature-card purple-card reveal"><div class="feature-icon">📊</div><h3>דוח חודשי</h3><p>מה עבד, מי הקהל, כמה הגיעו לעסק דרך הסושיאל — שקוף לגמרי.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- PERSONALITY -->
   <section class="svc-section alt">
     <div class="container">
-      <h2 class="section-title reveal">שירי — יותר מבוט. פשוט... עמיתה.</h2>
+      <h2 class="section-title reveal">שירי — יותר מבוט. עמיתה אמיתית.</h2>
       <p class="section-sub reveal">שירי לא נשמעת כמו רובוט. היא נשמעת כמו הבן אדם שהיית שוכר:</p>
       <div class="who-grid">
-        <div class="who-card reveal"><span>🗣️</span><p>כותבת בעברית שוטפת ואמיתית — לא מתורגמת ולא גנרית</p></div>
+        <div class="who-card reveal"><span>🗣️</span><p>כותבת בעברית שוטפת ואמיתית — לא מתורגמת</p></div>
         <div class="who-card reveal"><span>🎯</span><p>מכירה את הקהל שלך ומדברת אליו ישירות</p></div>
-        <div class="who-card reveal"><span>😂</span><p>יש לה הומור, אישיות, ויודעת מתי להיות רצינית</p></div>
-        <div class="who-card reveal"><span>🔥</span><p>מתעדכנת בטרנדים ומשלבת אותם לטובת העסק שלך</p></div>
+        <div class="who-card reveal"><span>😂</span><p>הומור, אישיות, ויודעת מתי להיות רצינית</p></div>
+        <div class="who-card reveal"><span>🔥</span><p>מתעדכנת בטרנדים ומשלבת אותם בתוכן שלך</p></div>
         <div class="who-card reveal"><span>🤝</span><p>לא יוצאת לחופשה, לא מאחרת, לא "שכחתי"</p></div>
-        <div class="who-card reveal"><span>📐</span><p>עובדת לפי הוראות שלך — לא ממציאה מהראש</p></div>
+        <div class="who-card reveal"><span>📐</span><p>עובדת לפי ההנחיות שלך — לא ממציאה מהראש</p></div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
   <section class="svc-section">
     <div class="container">
       <h2 class="section-title reveal">מסלולים — בחר מה מתאים לך</h2>
@@ -173,7 +232,7 @@
           <ul>
             <li>30 פוסטים בחודש</li>
             <li>סטוריז יומיים</li>
-            <li>2 ריל + סקריפט לסרטון</li>
+            <li>2 ריל + סקריפט</li>
             <li>תגובות ו-DM ראשוני</li>
             <li>לוח תוכן חודשי</li>
             <li>אינסטגרם + פייסבוק + TikTok</li>
@@ -189,7 +248,6 @@
             <li>ריל + TikTok שבועיים</li>
             <li>ניהול מלא של תגובות</li>
             <li>אסטרטגיית צמיחה חודשית</li>
-            <li>שיתופי פעולה ו-UGC</li>
             <li>כל הפלטפורמות</li>
           </ul>
           <a href="#contact" class="btn btn-ghost">בחר מסלול</a>
@@ -198,10 +256,32 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="svc-section alt" id="contact">
+  <section class="svc-section alt">
     <div class="container">
-      <h2 class="section-title reveal">מוכן לגייס את שירי לעסק שלך?</h2>
+      <h2 class="section-title reveal">מה אומרים עלינו</h2>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-top"><div class="avatar" style="background:#7c3aed">מ</div><div class="testi-meta"><strong>מיכל אהרוני</strong><span>בוטיק אופנה, ת"א</span></div></div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>שירי יודעת לכתוב בדיוק את הסגנון של המותג שלי. הלקוחות שואלות אותי מי עושה לי את הסושיאל ואני חייכת.</p>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-top"><div class="avatar" style="background:#db2777">א</div><div class="testi-meta"><strong>אבי שמש</strong><span>מסעדה, ירושלים</span></div></div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>מאז שהתחלנו עם שירי — כל שבוע מגיעים לקוחות שאומרים "ראיתי אתכם באינסטגרם". זה לא קרה לפני.</p>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-top"><div class="avatar" style="background:#0369a1">ג</div><div class="testi-meta"><strong>גל כץ</strong><span>מאמן כושר, חיפה</span></div></div>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <p>שילמתי 2,000₪ לחודש לאדם שעשה פחות ממה ששירי עושה ב-899₪. ההחלטה הטובה ביותר שעשיתי לעסק שלי.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="svc-section" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">מוכן לגייס את שירי?</h2>
       <p class="section-sub reveal">השאר פרטים ונסביר לך איך שירי מותאמת לסגנון העסק שלך ספציפית.</p>
       <div class="form-wrap reveal">
         <form id="leadForm" novalidate>
@@ -231,7 +311,7 @@
         </form>
         <div class="thank-you" id="thankYou">
           <h3>שירי כבר מתרגשת! ✨</h3>
-          <p>קיבלנו את הפרטים שלך ונחזור אליך בהקדם עם הצעה מותאמת.</p>
+          <p>קיבלנו את הפרטים שלך ונחזור אליך עם הצעה מותאמת בהקדם.</p>
           <a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="btn btn-wa">פתח שיחה עכשיו →</a>
         </div>
       </div>
@@ -245,14 +325,17 @@
         <p class="footer-about">הופכים עסקים קטנים ובינוניים לדיגיטליים — אתרים, חנויות, בוטים ואוטומציות שעובדים בשבילך.</p>
       </div>
       <div>
-        <h4>שירותים</h4>
+        <h4>העובדות שלנו</h4>
         <ul>
-          <li><a href="/services/landing-website.html">אתר תדמית / דף נחיתה</a></li>
+          <li><a href="/services/social-media-ai.html">שירי — סושיאל מדיה AI</a></li>
+          <li><a href="/services/ai-receptionist.html">דנה — מזכירה AI</a></li>
+          <li><a href="/services/whatsapp-bot.html">נועה — בוט וואטסאפ AI</a></li>
+        </ul>
+        <h4 style="margin-top:16px">שירותים נוספים</h4>
+        <ul>
+          <li><a href="/services/landing-website.html">אתר תדמית</a></li>
           <li><a href="/services/ecommerce-website.html">חנות אונליין</a></li>
-          <li><a href="/services/whatsapp-bot.html">בוט וואטסאפ</a></li>
           <li><a href="/services/google-reviews-bot.html">בוט ביקורות גוגל</a></li>
-          <li><a href="/services/ai-receptionist.html">מזכירה AI</a></li>
-          <li><a href="/services/social-media-ai.html">עובדת סושיאל AI — שירי</a></li>
           <li><a href="/services/appointments-clinics.html">מערכת תורים</a></li>
         </ul>
       </div>
@@ -270,7 +353,6 @@
   <a href="https://wa.me/972504593267" target="_blank" rel="noopener" class="whatsapp-float pulse" aria-label="דבר איתנו בוואטסאפ">
     <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.8 14.04c-.24.68-1.4 1.3-1.94 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-2.99 0-1.42.75-2.12 1.01-2.41.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.65.49.24.57.81 1.97.88 2.12.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.69-.81.87-1.09.18-.28.36-.23.61-.14.25.09 1.6.76 1.88.9.28.14.46.21.53.33.07.12.07.68-.17 1.36z"/></svg>
   </a>
-
   <script src="/app.js"></script>
 </body>
 </html>
