@@ -12,6 +12,25 @@
   onScroll();
 })();
 
+// Hamburger mobile menu
+(function () {
+  var btn = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  if (!btn || !mobileNav) return;
+  btn.addEventListener('click', function () {
+    var open = mobileNav.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      mobileNav.classList.remove('open');
+      btn.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+
 // Reveal on scroll
 (function () {
   var observer = new IntersectionObserver(function (entries) {

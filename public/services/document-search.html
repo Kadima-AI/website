@@ -461,12 +461,20 @@
       .ks-pricing-grid { grid-template-columns: 1fr; }
       .trust-grid { grid-template-columns: 1fr; }
       .roi-results { grid-template-columns: 1fr; }
+      .mock-ui { padding: 14px; }
+    }
+    @media (max-width: 768px) {
+      .ks-hero { padding: 100px 0 52px; }
+      .roi-calc { max-width: 100%; }
+      .check-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .tab-buttons { gap: 6px; }
       .tab-btn { padding: 8px 14px; font-size: .82rem; }
-      .roi-calc { padding: 26px 18px; }
+      .roi-calc { padding: 22px 14px; }
       .check-grid { grid-template-columns: 1fr; }
+      .faq-q { padding: 14px 16px; font-size: .95rem; }
+      .doc-float { display: none; }
     }
   </style>
 </head>
@@ -488,8 +496,18 @@
       <a href="/services/document-search.html" class="active">KadimaSearch</a>
     </nav>
     <a href="#contact" class="btn btn-primary nav-cta">דבר איתנו עכשיו 📲</a>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="תפריט"><span></span><span></span><span></span></button>
   </div>
 </header>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="/services/landing-website.html">אתר תדמית</a>
+  <a href="/services/ecommerce-website.html">חנות אונליין</a>
+  <a href="/services/whatsapp-bot.html">נועה AI</a>
+  <a href="/services/ai-receptionist.html">דנה AI</a>
+  <a href="/services/social-media-ai.html">שירי AI</a>
+  <a href="/services/document-search.html" class="active">KadimaSearch</a>
+  <a href="#contact" class="btn btn-primary">דבר איתנו עכשיו 📲</a>
+</nav>
 
 
 <!-- ═══ SECTION 1 — HERO ═══ -->
