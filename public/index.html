@@ -503,6 +503,24 @@
       .split-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 26px; }
     }
+    /* ===== Nav links ===== */
+    .nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: nowrap; }
+    .nav-links a { color: var(--text-light); font-weight: 600; font-size: .88rem; padding: 7px 11px; border-radius: 8px; transition: color .2s ease, background .2s ease; white-space: nowrap; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(59,130,246,.15); }
+    .nav-cta { font-size: .9rem; padding: 11px 20px; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 8px; transition: background .2s ease; flex-shrink: 0; }
+    .nav-hamburger:hover { background: rgba(255,255,255,.08); }
+    .nav-hamburger span { display: block; width: 100%; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s ease, opacity .3s ease; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav { display: none; position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 999; background: rgba(15,23,42,.98); backdrop-filter: blur(16px); flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 80px 24px 40px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { color: var(--text-light); font-weight: 700; font-size: 1.2rem; padding: 14px 24px; border-radius: 12px; width: 100%; text-align: center; transition: background .2s ease, color .2s ease; }
+    .mobile-nav a:hover, .mobile-nav a.active { background: rgba(59,130,246,.18); color: #fff; }
+    .mobile-nav .btn { width: 100%; margin-top: 12px; justify-content: center; }
+
+    @media (max-width: 880px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
     @media (max-width: 600px) {
       .section-pad { padding: 60px 0; }
       .logo-tag { display: none; }
@@ -518,12 +536,30 @@
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
       <div class="logo-wrap">
-        <a href="#" class="logo">קדימ<span>ה</span></a>
+        <a href="/" class="logo">קדימ<span>ה</span></a>
         <span class="logo-tag">הדיגיטל שעובד בשבילך — לא נגדך</span>
       </div>
+      <nav class="nav-links">
+        <a href="/services/landing-website.html">אתר תדמית</a>
+        <a href="/services/ecommerce-website.html">חנות אונליין</a>
+        <a href="/services/whatsapp-bot.html">בוט וואטסאפ</a>
+        <a href="/services/ai-receptionist.html">מזכירה AI</a>
+        <a href="/services/social-media-ai.html">סושיאל AI</a>
+        <a href="/services/appointments-clinics.html">תורים</a>
+      </nav>
       <a href="#contact" class="btn btn-primary nav-cta">דבר איתנו עכשיו 📲</a>
+      <button class="nav-hamburger" id="hamburgerBtn" aria-label="תפריט"><span></span><span></span><span></span></button>
     </div>
   </header>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="/services/landing-website.html">אתר תדמית</a>
+    <a href="/services/ecommerce-website.html">חנות אונליין</a>
+    <a href="/services/whatsapp-bot.html">בוט וואטסאפ</a>
+    <a href="/services/ai-receptionist.html">מזכירה AI</a>
+    <a href="/services/social-media-ai.html">סושיאל AI</a>
+    <a href="/services/appointments-clinics.html">תורים</a>
+    <a href="#contact" class="btn btn-primary">דבר איתנו עכשיו 📲</a>
+  </nav>
 
   <main>
     <!-- ===== HERO ===== -->
@@ -892,10 +928,27 @@
       submitBtn.disabled = true;
 
       setTimeout(function () {
-        form.style.display = 'none';
-        thankYou.classList.add('show');
+        window.location.href = '/lead-confirmation';
       }, 1500);
     });
+
+    // ===== Hamburger menu =====
+    var hamburgerBtn = document.getElementById('hamburgerBtn');
+    var mobileNav = document.getElementById('mobileNav');
+    if (hamburgerBtn && mobileNav) {
+      hamburgerBtn.addEventListener('click', function () {
+        var open = mobileNav.classList.toggle('open');
+        hamburgerBtn.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      mobileNav.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          mobileNav.classList.remove('open');
+          hamburgerBtn.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
   </script>
 </body>
 </html>
