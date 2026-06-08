@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>קדימה | קיבלנו את הפרטים שלך</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0F172A;
+      --navy-soft: #1E293B;
+      --blue: #3B82F6;
+      --gold: #F59E0B;
+      --text-light: #E2E8F0;
+      --muted: #94A3B8;
+      --green: #22C55E;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Heebo', system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .card {
+      background: var(--navy-soft);
+      border: 1px solid rgba(148,163,184,.18);
+      border-radius: 24px;
+      padding: 56px 48px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+    .checkmark {
+      width: 72px;
+      height: 72px;
+      background: rgba(34,197,94,.15);
+      border: 2px solid var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 2rem;
+    }
+    h1 { font-size: 1.9rem; color: #fff; margin-bottom: 14px; }
+    p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 10px; }
+    p strong { color: var(--text-light); }
+    .divider { border: none; border-top: 1px solid rgba(148,163,184,.15); margin: 28px 0; }
+    .next-steps { text-align: right; }
+    .next-steps h2 { font-size: 1rem; color: var(--muted); font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .step-num {
+      background: rgba(59,130,246,.18);
+      border: 1px solid rgba(59,130,246,.4);
+      color: var(--blue);
+      font-weight: 800;
+      font-size: .85rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text { font-size: .97rem; color: var(--text-light); line-height: 1.5; }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 32px;
+      background: #25D366;
+      color: #fff;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+    }
+    .btn-wa:hover { background: #1ebe5d; transform: translateY(-2px); }
+    .back { display: block; margin-top: 16px; color: var(--muted); font-size: .9rem; }
+    .back a { color: var(--blue); text-decoration: underline; }
+    @media (max-width: 480px) {
+      .card { padding: 40px 24px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="checkmark">✓</div>
+    <h1>קיבלנו את הפרטים!</h1>
+    <p>תודה שפנית לקדימה.<br /><strong>נחזור אליך תוך 24 שעות</strong> עם הצעה מותאמת לעסק שלך.</p>
+
+    <hr class="divider" />
+
+    <div class="next-steps">
+      <h2>מה קורה עכשיו?</h2>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">אנחנו בודקים את הפרטים שמילאת ומכינים הצעה מותאמת לעסק שלך.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">נצור איתך קשר בוואטסאפ או בטלפון לשיחת היכרות קצרה (15 דקות).</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">אחרי אישורך — מתחילים לבנות. ברוב המקרים מוכן תוך 5 ימי עסקים.</div>
+      </div>
+    </div>
+
+    <a href="https://wa.me/972504593267?text=היי%2C%20מילאתי%20פרטים%20באתר%20ורוצה%20לדעת%20מתי%20חוזרים%20אליי" class="btn-wa" target="_blank" rel="noopener">
+      💬 כתוב לנו בוואטסאפ
+    </a>
+
+    <p class="back">רוצה לחזור? <a href="/">לדף הבית</a></p>
+  </div>
+</body>
+</html>
