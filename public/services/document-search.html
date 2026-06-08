@@ -649,40 +649,17 @@
               <span class="terminal-title">KadimaSearch — חיפוש במסמכים</span>
             </div>
             <div class="terminal-body">
-              <div class="t-prompt">
-                <span class="t-icon">💬</span>
-                <span class="t-user">אילו חוזים עם לקוחות פג תוקפם ב-Q3 2025 ויש בהם סעיף חידוש אוטומטי?</span>
-              </div>
-              <div class="t-answer">
-                <div class="t-answer-label">✦ תשובת ה-AI</div>
-                <div class="t-answer-text">
-                  נמצאו <strong>3 חוזים</strong> שפג תוקפם ברבעון השלישי עם סעיף חידוש אוטומטי:
-                  <br /><br />
-                  • <strong>ABC בע״מ</strong> — פג 15.07.25, חידוש אוטומטי ל-12 חודש אלא אם הודעה 30 יום מראש<br />
-                  • <strong>דוד כהן</strong> — פג 02.09.25, חידוש אוטומטי ל-6 חודשים<br />
-                  • <strong>נדל״ן השקעות</strong> — פג 28.09.25, חידוש עם הצמדה למדד
-                </div>
-                <div class="t-sources">
-                  <span class="t-source">📄 ABC_contract_2024.pdf</span>
-                  <span class="t-source">📄 cohen_david_agreement.docx</span>
-                  <span class="t-source">📄 realestate_lease.pdf</span>
-                </div>
+              <div id="terminalSlide" style="transition:opacity .4s ease">
+                <!-- populated by JS -->
               </div>
               <hr class="t-divider" />
               <div class="t-stats-row">
-                <div class="t-stat">
-                  <span class="t-stat-num">2,847</span>
-                  <span class="t-stat-label">מסמכים</span>
-                </div>
-                <div class="t-stat">
-                  <span class="t-stat-num">1.4s</span>
-                  <span class="t-stat-label">זמן תשובה</span>
-                </div>
-                <div class="t-stat">
-                  <span class="t-stat-num">100%</span>
-                  <span class="t-stat-label">פרטי</span>
-                </div>
+                <div class="t-stat"><span class="t-stat-num">2,847</span><span class="t-stat-label">מסמכים</span></div>
+                <div class="t-stat"><span class="t-stat-num" id="tTime">1.4s</span><span class="t-stat-label">זמן תשובה</span></div>
+                <div class="t-stat"><span class="t-stat-num">100%</span><span class="t-stat-label">פרטי</span></div>
               </div>
+              <!-- dots -->
+              <div style="display:flex;justify-content:center;gap:6px;margin-top:14px" id="termDots"></div>
             </div>
           </div>
         </div>
@@ -1065,6 +1042,96 @@
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+    // ── Terminal carousel ──────────────────────────────────────────
+    var examples = [
+      {
+        q: 'תמצא לי את החוזה עם לקוח ABC',
+        a: 'נמצא <strong>1 חוזה</strong> עם ABC בע״מ:<br /><br />📄 <strong>ABC_contract_2024.pdf</strong> — חתום 12.03.24, תוקף עד 12.03.26, ערך ₪48,000/שנה',
+        sources: ['📄 ABC_contract_2024.pdf'],
+        time: '0.8s'
+      },
+      {
+        q: 'כל המסמכים של יוסי כהן',
+        a: 'נמצאו <strong>7 מסמכים</strong> עבור יוסי כהן:<br /><br />• הסכם שכירות (2022) • 3 חשבוניות פתוחות • תעודת זהות מצולמת • טופס הצהרה • דוח שנתי 2023',
+        sources: ['📄 cohen_yossi_lease.pdf', '📄 invoices_2023.xlsx', '📄 declaration.docx'],
+        time: '1.1s'
+      },
+      {
+        q: 'מה תנאי הביטול בהסכם עם ספק Y?',
+        a: 'לפי סעיף 8.2 בהסכם עם ספק Y:<br /><br />"ניתן לבטל ההסכם בהודעה מוקדמת של <strong>60 יום</strong>. ביטול ללא הודעה מוקדמת יחייב פיצוי של 15% מיתרת החוזה."',
+        sources: ['📄 supplier_Y_agreement.pdf — עמ׳ 4'],
+        time: '1.2s'
+      },
+      {
+        q: 'אילו חוזים פגי תוקף ב-Q3 2025 עם סעיף חידוש אוטומטי?',
+        a: 'נמצאו <strong>3 חוזים</strong> עם חידוש אוטומטי שפגי תוקף ברבעון השלישי:<br /><br />• <strong>ABC בע״מ</strong> — פג 15.07.25, חידוש ל-12 חודש<br />• <strong>דוד כהן</strong> — פג 02.09.25, חידוש ל-6 חודשים<br />• <strong>נדל״ן השקעות</strong> — פג 28.09.25, הצמדה למדד',
+        sources: ['📄 ABC_contract_2024.pdf', '📄 cohen_david_agreement.docx', '📄 realestate_lease.pdf'],
+        time: '1.4s'
+      },
+      {
+        q: 'מי חייב לנו כסף לפי כל החשבוניות הפתוחות?',
+        a: 'נמצאו <strong>5 חשבוניות פתוחות</strong> בסך כולל ₪84,300:<br /><br />• גלעד בע״מ — ₪22,000 (איחור 45 יום)<br />• מרכז רפואי X — ₪31,500 (איחור 12 יום)<br />• 3 לקוחות נוספים — ₪30,800',
+        sources: ['📄 invoices_open_2025.xlsx', '📄 billing_summary.pdf'],
+        time: '1.6s'
+      },
+      {
+        q: 'רשום כל החוזים עם סעיף סיום מעל 30 יום',
+        a: 'נמצאו <strong>8 חוזים</strong> עם תקופת סיום מעל 30 יום. ממוצע: 52 יום. הארוך ביותר: <strong>90 יום</strong> (הסכם עם מרכז לוגיסטי Z). מוכן לייצוא כ-CSV?',
+        sources: ['📄 contracts_db.xlsx', '📄 6 קבצי PDF נוספים'],
+        time: '1.9s'
+      }
+    ];
+
+    var current = 0;
+    var slide = document.getElementById('terminalSlide');
+    var dotsEl = document.getElementById('termDots');
+    var timeEl = document.getElementById('tTime');
+
+    // build dots
+    examples.forEach(function (_, i) {
+      var d = document.createElement('span');
+      d.style.cssText = 'width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s,transform .3s;cursor:pointer;display:inline-block';
+      d.addEventListener('click', function () { goTo(i); });
+      dotsEl.appendChild(d);
+    });
+
+    function renderSlide(idx) {
+      var ex = examples[idx];
+      var sourcesHtml = ex.sources.map(function(s){ return '<span class="t-source">'+s+'</span>'; }).join('');
+      slide.innerHTML =
+        '<div class="t-prompt">' +
+          '<span class="t-icon">💬</span>' +
+          '<span class="t-user">' + ex.q + '</span>' +
+        '</div>' +
+        '<div class="t-answer">' +
+          '<div class="t-answer-label">✦ תשובת ה-AI</div>' +
+          '<div class="t-answer-text">' + ex.a + '</div>' +
+          '<div class="t-sources" style="margin-top:10px">' + sourcesHtml + '</div>' +
+        '</div>';
+      if (timeEl) timeEl.textContent = ex.time;
+      Array.from(dotsEl.children).forEach(function(d, i) {
+        d.style.background = i === idx ? '#6366f1' : 'rgba(255,255,255,.2)';
+        d.style.transform  = i === idx ? 'scale(1.4)' : 'scale(1)';
+      });
+    }
+
+    function goTo(idx) {
+      slide.style.opacity = '0';
+      setTimeout(function () {
+        current = idx;
+        renderSlide(current);
+        slide.style.opacity = '1';
+      }, 350);
+    }
+
+    // init
+    renderSlide(0);
+
+    // auto-advance every 4s
+    setInterval(function () {
+      goTo((current + 1) % examples.length);
+    }, 4000);
   </script>
 </body>
 </html>
