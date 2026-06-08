@@ -90,8 +90,7 @@
     if (submitBtn) submitBtn.disabled = true;
 
     setTimeout(function () {
-      if (form) form.style.display = 'none';
-      if (thankYou) thankYou.classList.add('show');
+      window.location.href = '/lead-confirmation';
     }, 1500);
   });
 })();
