@@ -20,10 +20,15 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 92px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
   background: var(--cream);
   color: var(--ink);
   font-family: var(--font-body), sans-serif;
@@ -33,8 +38,20 @@ body {
 }
 
 .sweet-sin-site {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
   font-family: var(--font-body), sans-serif;
+}
+
+@supports (overflow: clip) {
+  html,
+  body,
+  .sweet-sin-site {
+    overflow-x: clip;
+  }
 }
 
 body::before {
@@ -257,7 +274,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .reveal-4 { animation-delay: 370ms; }
 @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-.marquee { overflow: hidden; border-block: 1px solid rgba(255,255,255,.14); background: var(--cocoa); color: #f8ede2; }
+.marquee { width: 100%; max-width: 100%; overflow: hidden; border-block: 1px solid rgba(255,255,255,.14); background: var(--cocoa); color: #f8ede2; }
 .marquee div { display: flex; align-items: center; justify-content: center; gap: 26px; min-width: max-content; padding: 16px 24px; animation: drift 25s linear infinite alternate; }
 .marquee span { font-family: var(--font-display), serif; font-size: 19px; }
 .marquee svg { color: var(--blush); }
